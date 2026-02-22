@@ -79,7 +79,14 @@ const defaultData = {
           "intro": "Projects, updates, and random garbage."
       }
   },
-  games: [],
+  games: [
+      {
+          "title": "Hollow Knight",
+          "description": "Why did nobody tell me Metroidvanias were peak?",
+          "imageUrl": "https://cdn.mobygames.com/covers/1792719-hollow-knight-limited-edition-linux-front-cover.jpg",
+          "id": 1
+      }
+  ],
   projects: [
       {
           "title": "The Donut",

@@ -29,7 +29,7 @@ const defaultData = {
               "letterboxd": "Movie opinions",
               "steam": "My games",
               "characterhub": "My characters",
-              "tumblr": "My blog"
+              "tumblr": "Random crap"
           },
           "badges": [
               {
@@ -76,7 +76,7 @@ const defaultData = {
       },
       "blog": {
           "title": "Blog",
-          "intro": "Thoughts, updates, and random projects."
+          "intro": "Projects, updates, and random garbage."
       }
   },
   games: [],

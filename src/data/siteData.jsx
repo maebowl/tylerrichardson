@@ -85,6 +85,36 @@ const defaultData = {
           "description": "Why did nobody tell me Metroidvanias were peak?",
           "imageUrl": "https://cdn.mobygames.com/covers/1792719-hollow-knight-limited-edition-linux-front-cover.jpg",
           "id": 1
+      },
+      {
+          "title": "Hollow Knight: Silksong",
+          "description": "HK but better? That’s possible?",
+          "imageUrl": "https://cdn.mobygames.com/covers/20548218-hollow-knight-silksong-windows-apps-front-cover.png",
+          "id": 2
+      },
+      {
+          "title": "OneShot",
+          "description": "I can’t even make a joke about this one it’s just too good",
+          "imageUrl": "https://m.media-amazon.com/images/M/MV5BNWQzYWE5MjQtYmE0MS00MDc0LTlmZTYtMDBiMjBmNmUxYjdlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+          "id": 3
+      },
+      {
+          "title": "Splatoon 3",
+          "description": "The only shooter i’ve ever enjoyed",
+          "imageUrl": "https://i.ebayimg.com/images/g/MngAAOSw8JFjC-qU/s-l1600.jpg",
+          "id": 4
+      },
+      {
+          "title": "Haste",
+          "description": "Sonic but actually good",
+          "imageUrl": "https://www.gematsu.com/wp-content/uploads/2023/11/Game-Page-Box-Art_HASTE-Broken-Worlds-Inits.jpg",
+          "id": 5
+      },
+      {
+          "title": "A Hat in Time",
+          "description": "What if Mario 64 but not old?",
+          "imageUrl": "https://wallpaperaccess.com/full/2146096.jpg",
+          "id": 6
       }
   ],
   projects: [

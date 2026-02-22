@@ -230,8 +230,8 @@ const defaultData = {
       {
           "id": "steam",
           "name": "Steam",
-          "handle": "Nozoa",
-          "url": "https://steamcommunity.com/id/Nozoa"
+          "handle": "Ravioli",
+          "url": "https://steamcommunity.com/id/rAAAAAAvioli/"
       },
       {
           "id": "characterhub",
@@ -243,7 +243,7 @@ const defaultData = {
           "id": "tumblr",
           "name": "Tumblr",
           "handle": "Nozoa",
-          "url": "https://www.tumblr.com/nozoa"
+          "url": "https://www.tumblr.com/nozoast"
       }
   ],
 }

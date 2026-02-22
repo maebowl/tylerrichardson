@@ -15,9 +15,9 @@ const defaultData = {
           "title": "Favorite Songs",
           "intro": "The music I either bang my head to or bawl my eyes out to."
       },
-      "videos": {
-          "title": "Videos",
-          "intro": "Check out some of my content."
+      "games": {
+          "title": "Games",
+          "intro": "Some of my favorite games."
       },
       "contact": {
           "title": "Contact",
@@ -27,9 +27,9 @@ const defaultData = {
               "youtube": "Random crap",
               "twitch": "Catch me live",
               "letterboxd": "Movie opinions",
-              "pinterest": "Art I like",
+              "steam": "My games",
               "characterhub": "My characters",
-              "bluesky": "Irrelevant"
+              "tumblr": "My blog"
           },
           "badges": [
               {
@@ -79,7 +79,7 @@ const defaultData = {
           "intro": "Thoughts, updates, and random projects."
       }
   },
-  videos: [],
+  games: [],
   projects: [
       {
           "title": "The Donut",
@@ -196,10 +196,10 @@ const defaultData = {
           "url": "https://letterboxd.com/loretie/"
       },
       {
-          "id": "pinterest",
-          "name": "Pinterest",
+          "id": "steam",
+          "name": "Steam",
           "handle": "Nozoa",
-          "url": "https://ca.pinterest.com/NozoaSLT/"
+          "url": "https://steamcommunity.com/id/Nozoa"
       },
       {
           "id": "characterhub",
@@ -208,10 +208,10 @@ const defaultData = {
           "url": "https://characterhub.com/profile/Nozoa"
       },
       {
-          "id": "bluesky",
-          "name": "Bluesky",
+          "id": "tumblr",
+          "name": "Tumblr",
           "handle": "Nozoa",
-          "url": "https://bsky.app/profile/nozoa.bsky.social"
+          "url": "https://www.tumblr.com/nozoa"
       }
   ],
 }
@@ -221,26 +221,26 @@ const SiteDataContext = createContext()
 export function SiteDataProvider({ children }) {
   const [data, setData] = useState(defaultData)
 
-  const updateVideos = (videos) => setData(prev => ({ ...prev, videos }))
+  const updateGames = (games) => setData(prev => ({ ...prev, games }))
   const updateProjects = (projects) => setData(prev => ({ ...prev, projects }))
   const updateSongs = (songs) => setData(prev => ({ ...prev, songs }))
   const updatePosts = (posts) => setData(prev => ({ ...prev, posts }))
   const updateSocials = (socials) => setData(prev => ({ ...prev, socials }))
 
-  const addVideo = (video) => {
-    const id = Math.max(0, ...data.videos.map(v => v.id)) + 1
-    setData(prev => ({ ...prev, videos: [...prev.videos, { ...video, id }] }))
+  const addGame = (game) => {
+    const id = Math.max(0, ...data.games.map(g => g.id)) + 1
+    setData(prev => ({ ...prev, games: [...prev.games, { ...game, id }] }))
   }
 
-  const updateVideo = (id, updates) => {
+  const updateGame = (id, updates) => {
     setData(prev => ({
       ...prev,
-      videos: prev.videos.map(v => v.id === id ? { ...v, ...updates } : v)
+      games: prev.games.map(g => g.id === id ? { ...g, ...updates } : g)
     }))
   }
 
-  const deleteVideo = (id) => {
-    setData(prev => ({ ...prev, videos: prev.videos.filter(v => v.id !== id) }))
+  const deleteGame = (id) => {
+    setData(prev => ({ ...prev, games: prev.games.filter(g => g.id !== id) }))
   }
 
   const addProject = (project) => {
@@ -327,14 +327,14 @@ export function SiteDataProvider({ children }) {
   return (
     <SiteDataContext.Provider value={{
       ...data,
-      updateVideos,
+      updateGames,
       updateProjects,
       updateSongs,
       updatePosts,
       updateSocials,
-      addVideo,
-      updateVideo,
-      deleteVideo,
+      addGame,
+      updateGame,
+      deleteGame,
       addProject,
       updateProject,
       deleteProject,

@@ -143,7 +143,7 @@ export async function uploadFileToGitHub(file, token) {
 }
 
 function generateSiteDataFile(data) {
-  const { siteSettings, videos, projects, songs, posts, socials } = data
+  const { siteSettings, games, projects, songs, posts, socials } = data
 
   // Helper to indent JSON properly (add 2 spaces to each line after the first)
   const indent = (json) => {
@@ -155,7 +155,7 @@ function generateSiteDataFile(data) {
 
 const defaultData = {
   siteSettings: ${indent(JSON.stringify(siteSettings, null, 4))},
-  videos: ${indent(JSON.stringify(videos, null, 4))},
+  games: ${indent(JSON.stringify(games, null, 4))},
   projects: ${indent(JSON.stringify(projects, null, 4))},
   songs: ${indent(JSON.stringify(songs, null, 4))},
   posts: ${indent(JSON.stringify(posts, null, 4))},
@@ -167,26 +167,26 @@ const SiteDataContext = createContext()
 export function SiteDataProvider({ children }) {
   const [data, setData] = useState(defaultData)
 
-  const updateVideos = (videos) => setData(prev => ({ ...prev, videos }))
+  const updateGames = (games) => setData(prev => ({ ...prev, games }))
   const updateProjects = (projects) => setData(prev => ({ ...prev, projects }))
   const updateSongs = (songs) => setData(prev => ({ ...prev, songs }))
   const updatePosts = (posts) => setData(prev => ({ ...prev, posts }))
   const updateSocials = (socials) => setData(prev => ({ ...prev, socials }))
 
-  const addVideo = (video) => {
-    const id = Math.max(0, ...data.videos.map(v => v.id)) + 1
-    setData(prev => ({ ...prev, videos: [...prev.videos, { ...video, id }] }))
+  const addGame = (game) => {
+    const id = Math.max(0, ...data.games.map(g => g.id)) + 1
+    setData(prev => ({ ...prev, games: [...prev.games, { ...game, id }] }))
   }
 
-  const updateVideo = (id, updates) => {
+  const updateGame = (id, updates) => {
     setData(prev => ({
       ...prev,
-      videos: prev.videos.map(v => v.id === id ? { ...v, ...updates } : v)
+      games: prev.games.map(g => g.id === id ? { ...g, ...updates } : g)
     }))
   }
 
-  const deleteVideo = (id) => {
-    setData(prev => ({ ...prev, videos: prev.videos.filter(v => v.id !== id) }))
+  const deleteGame = (id) => {
+    setData(prev => ({ ...prev, games: prev.games.filter(g => g.id !== id) }))
   }
 
   const addProject = (project) => {
@@ -273,14 +273,14 @@ export function SiteDataProvider({ children }) {
   return (
     <SiteDataContext.Provider value={{
       ...data,
-      updateVideos,
+      updateGames,
       updateProjects,
       updateSongs,
       updatePosts,
       updateSocials,
-      addVideo,
-      updateVideo,
-      deleteVideo,
+      addGame,
+      updateGame,
+      deleteGame,
       addProject,
       updateProject,
       deleteProject,

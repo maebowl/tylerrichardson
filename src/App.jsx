@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Music from './pages/Music'
 import Contact from './pages/Contact'
-import Videos from './pages/Videos'
+import Games from './pages/Games'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Admin from './pages/Admin'
@@ -22,7 +22,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/music" element={<Music />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/videos" element={<Videos />} />
+          <Route path="/games" element={<Games />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/admin" element={<Admin />} />

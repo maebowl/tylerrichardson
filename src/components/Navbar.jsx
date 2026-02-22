@@ -72,7 +72,7 @@ function Navbar() {
           </button>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
             <li><Link to="/projects" onClick={closeMenu}>Blender</Link></li>
-            <li><Link to="/videos" onClick={closeMenu}>Videos</Link></li>
+            <li><Link to="/games" onClick={closeMenu}>Games</Link></li>
             <li><Link to="/music" onClick={closeMenu}>Music</Link></li>
             <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
             <li><Link to="/blog" onClick={closeMenu}>Blog</Link></li>

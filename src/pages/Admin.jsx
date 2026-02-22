@@ -7,6 +7,7 @@ import './Admin.css'
 const ADMIN_PASSWORD = 'ilovelegobatman'
 const AUTH_KEY = 'tyler-admin-auth'
 const GITHUB_TOKEN_KEY = 'tyler-github-token'
+const RAWG_KEY = 'tyler-rawg-key'
 
 function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -14,14 +15,15 @@ function Admin() {
   const [error, setError] = useState('')
   const [activeTab, setActiveTab] = useState('posts')
   const [githubToken, setGithubToken] = useState('')
+  const [rawgKey, setRawgKey] = useState('')
   const [showTokenInput, setShowTokenInput] = useState(false)
   const [saving, setSaving] = useState(false)
   const [saveStatus, setSaveStatus] = useState('')
 
   const {
-    siteSettings, videos, projects, songs, posts, socials,
+    siteSettings, games, projects, songs, posts, socials,
     updateSiteSettings,
-    updateVideos, addVideo, updateVideo, deleteVideo,
+    updateGames, addGame, updateGame, deleteGame,
     updateProjects, addProject, updateProject, deleteProject,
     updateSongs, addSong, updateSong, deleteSong,
     updatePosts, addPost, updatePost, deletePost,
@@ -36,6 +38,10 @@ function Admin() {
     const savedToken = localStorage.getItem(GITHUB_TOKEN_KEY)
     if (savedToken) {
       setGithubToken(savedToken)
+    }
+    const savedRawg = localStorage.getItem(RAWG_KEY)
+    if (savedRawg) {
+      setRawgKey(savedRawg)
     }
   }, [])
 
@@ -57,8 +63,9 @@ function Admin() {
 
   const handleSaveToken = () => {
     localStorage.setItem(GITHUB_TOKEN_KEY, githubToken)
+    localStorage.setItem(RAWG_KEY, rawgKey)
     setShowTokenInput(false)
-    setSaveStatus('Token saved!')
+    setSaveStatus('Tokens saved!')
     setTimeout(() => setSaveStatus(''), 3000)
   }
 
@@ -72,7 +79,7 @@ function Admin() {
     setSaveStatus('')
 
     try {
-      await saveToGitHub({ siteSettings, videos, projects, songs, posts, socials }, githubToken)
+      await saveToGitHub({ siteSettings, games, projects, songs, posts, socials }, githubToken)
       setSaveStatus('Saved to GitHub! Site will rebuild shortly.')
     } catch (err) {
       setSaveStatus(`Error: ${err.message}`)
@@ -117,7 +124,7 @@ function Admin() {
               {saving ? 'Saving...' : 'Save to GitHub'}
             </button>
             <button onClick={() => setShowTokenInput(!showTokenInput)} className="btn-secondary">
-              {githubToken ? 'Change Token' : 'Set Token'}
+              {githubToken ? 'Change Tokens' : 'Set Tokens'}
             </button>
             <button onClick={resetToDefaults} className="btn-secondary">Reset to Defaults</button>
             <button onClick={handleLogout} className="btn-secondary">Logout</button>
@@ -126,7 +133,7 @@ function Admin() {
 
         {showTokenInput && (
           <div className="token-input-section">
-            <p>Enter your GitHub Personal Access Token (needs repo scope):</p>
+            <p>GitHub Personal Access Token (needs repo scope):</p>
             <div className="token-input-row">
               <input
                 type="password"
@@ -134,8 +141,17 @@ function Admin() {
                 onChange={(e) => setGithubToken(e.target.value)}
                 placeholder="ghp_xxxxxxxxxxxx"
               />
-              <button onClick={handleSaveToken}>Save Token</button>
             </div>
+            <p style={{ marginTop: '1rem' }}>RAWG API Key (for game search — get one at rawg.io/apidocs):</p>
+            <div className="token-input-row">
+              <input
+                type="password"
+                value={rawgKey}
+                onChange={(e) => setRawgKey(e.target.value)}
+                placeholder="RAWG API key"
+              />
+            </div>
+            <button onClick={handleSaveToken} className="btn-primary" style={{ marginTop: '1rem' }}>Save Tokens</button>
           </div>
         )}
 
@@ -159,10 +175,10 @@ function Admin() {
             Blog Posts
           </button>
           <button
-            className={`tab ${activeTab === 'videos' ? 'active' : ''}`}
-            onClick={() => setActiveTab('videos')}
+            className={`tab ${activeTab === 'games' ? 'active' : ''}`}
+            onClick={() => setActiveTab('games')}
           >
-            Videos
+            Games
           </button>
           <button
             className={`tab ${activeTab === 'projects' ? 'active' : ''}`}
@@ -203,8 +219,8 @@ function Admin() {
           {activeTab === 'posts' && (
             <PostsManager posts={posts} addPost={addPost} updatePost={updatePost} deletePost={deletePost} updatePosts={updatePosts} githubToken={githubToken} />
           )}
-          {activeTab === 'videos' && (
-            <VideosManager videos={videos} addVideo={addVideo} updateVideo={updateVideo} deleteVideo={deleteVideo} updateVideos={updateVideos} />
+          {activeTab === 'games' && (
+            <GamesManager games={games} addGame={addGame} updateGame={updateGame} deleteGame={deleteGame} updateGames={updateGames} githubToken={githubToken} rawgKey={rawgKey} />
           )}
           {activeTab === 'projects' && (
             <ProjectsManager projects={projects} addProject={addProject} updateProject={updateProject} deleteProject={deleteProject} updateProjects={updateProjects} githubToken={githubToken} />
@@ -358,21 +374,21 @@ function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
       </div>
 
       <div className="settings-section">
-        <h3>Videos Page</h3>
+        <h3>Games Page</h3>
         <div className="settings-fields">
           <label>
             <span>Title</span>
             <input
-              value={siteSettings.videos.title}
-              onChange={(e) => updateSiteSettings('videos', { title: e.target.value })}
-              placeholder="Videos"
+              value={siteSettings.games?.title || ''}
+              onChange={(e) => updateSiteSettings('games', { title: e.target.value })}
+              placeholder="Games"
             />
           </label>
           <label>
             <span>Intro Text</span>
             <textarea
-              value={siteSettings.videos.intro}
-              onChange={(e) => updateSiteSettings('videos', { intro: e.target.value })}
+              value={siteSettings.games?.intro || ''}
+              onChange={(e) => updateSiteSettings('games', { intro: e.target.value })}
               placeholder="Page introduction..."
               rows={2}
             />
@@ -651,58 +667,144 @@ function PostsManager({ posts, addPost, updatePost, deletePost, updatePosts, git
   )
 }
 
-function VideosManager({ videos, addVideo, updateVideo, deleteVideo, updateVideos }) {
+function GameSearch({ rawgKey, onSelect }) {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [searching, setSearching] = useState(false)
+  const debounceRef = useRef(null)
+
+  const search = (q) => {
+    if (!q.trim() || !rawgKey) {
+      setResults([])
+      return
+    }
+    setSearching(true)
+    fetch(`https://api.rawg.io/api/games?key=${rawgKey}&search=${encodeURIComponent(q)}&page_size=6`)
+      .then(res => res.json())
+      .then(data => {
+        setResults(data.results || [])
+        setSearching(false)
+      })
+      .catch(() => {
+        setResults([])
+        setSearching(false)
+      })
+  }
+
+  const handleChange = (e) => {
+    const val = e.target.value
+    setQuery(val)
+    clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => search(val), 400)
+  }
+
+  const handleSelect = (game) => {
+    onSelect({ title: game.name, imageUrl: game.background_image || '' })
+    setQuery('')
+    setResults([])
+  }
+
+  return (
+    <div className="game-search">
+      <input
+        placeholder={rawgKey ? 'Search for a game...' : 'Set RAWG API key to search'}
+        value={query}
+        onChange={handleChange}
+        disabled={!rawgKey}
+      />
+      {searching && <p className="search-status">Searching...</p>}
+      {results.length > 0 && (
+        <div className="search-results">
+          {results.map(game => (
+            <button key={game.id} className="search-result" onClick={() => handleSelect(game)}>
+              {game.background_image ? (
+                <img src={game.background_image} alt={game.name} className="search-result-img" />
+              ) : (
+                <div className="search-result-img search-result-placeholder" />
+              )}
+              <div className="search-result-info">
+                <strong>{game.name}</strong>
+                {game.released && <span>{game.released.slice(0, 4)}</span>}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function GamesManager({ games, addGame, updateGame, deleteGame, updateGames, githubToken, rawgKey }) {
   const [editing, setEditing] = useState(null)
-  const [newVideo, setNewVideo] = useState({ title: '', subtitle: '', youtubeUrl: '' })
+  const [newGame, setNewGame] = useState({ title: '', description: '', imageUrl: '' })
 
   const handleAdd = () => {
-    if (!newVideo.title || !newVideo.youtubeUrl) return
-    addVideo(newVideo)
-    setNewVideo({ title: '', subtitle: '', youtubeUrl: '' })
+    if (!newGame.title) return
+    addGame(newGame)
+    setNewGame({ title: '', description: '', imageUrl: '' })
+  }
+
+  const handleSearchSelect = (game) => {
+    setNewGame({ ...newGame, title: game.title, imageUrl: game.imageUrl })
   }
 
   const handleUpdate = (id) => {
-    updateVideo(id, editing)
+    updateGame(id, editing)
     setEditing(null)
   }
 
   const moveItem = (index, direction) => {
     const newIndex = index + direction
-    if (newIndex < 0 || newIndex >= videos.length) return
-    const newVideos = [...videos]
-    const [removed] = newVideos.splice(index, 1)
-    newVideos.splice(newIndex, 0, removed)
-    updateVideos(newVideos)
+    if (newIndex < 0 || newIndex >= games.length) return
+    const newGames = [...games]
+    const [removed] = newGames.splice(index, 1)
+    newGames.splice(newIndex, 0, removed)
+    updateGames(newGames)
   }
 
   return (
     <div className="manager">
-      <h2>Videos</h2>
+      <h2>Games</h2>
+      <p className="manager-note">Search for a game to auto-fill title and cover, or add manually.</p>
 
       <div className="add-form">
-        <h3>Add New Video</h3>
+        <h3>Add New Game</h3>
+        <GameSearch rawgKey={rawgKey} onSelect={handleSearchSelect} />
         <input
           placeholder="Title"
-          value={newVideo.title}
-          onChange={(e) => setNewVideo({ ...newVideo, title: e.target.value })}
+          value={newGame.title}
+          onChange={(e) => setNewGame({ ...newGame, title: e.target.value })}
         />
         <input
-          placeholder="Subtitle"
-          value={newVideo.subtitle}
-          onChange={(e) => setNewVideo({ ...newVideo, subtitle: e.target.value })}
+          placeholder="Note (optional)"
+          value={newGame.description}
+          onChange={(e) => setNewGame({ ...newGame, description: e.target.value })}
         />
-        <input
-          placeholder="YouTube URL (e.g. https://youtube.com/watch?v=...)"
-          value={newVideo.youtubeUrl}
-          onChange={(e) => setNewVideo({ ...newVideo, youtubeUrl: e.target.value })}
-        />
-        <button onClick={handleAdd}>Add Video</button>
+        <div className="media-input-group">
+          <input
+            placeholder="Cover Image URL (optional)"
+            value={newGame.imageUrl}
+            onChange={(e) => setNewGame({ ...newGame, imageUrl: e.target.value })}
+          />
+          <FileUpload
+            accept="image/*"
+            label="Upload Cover"
+            githubToken={githubToken}
+            onUpload={(url) => setNewGame({ ...newGame, imageUrl: url })}
+          />
+        </div>
+        {newGame.imageUrl && (
+          <div className="game-cover-preview">
+            <img src={newGame.imageUrl} alt="Cover preview" />
+          </div>
+        )}
+        <button onClick={handleAdd}>Add Game</button>
       </div>
 
       <div className="items-list">
-        {videos.map((video, index) => (
-          <div key={video.id} className="item">
-            {editing?.id === video.id ? (
+        {games.map((game, index) => (
+          <div key={game.id} className="item">
+            {editing?.id === game.id ? (
               <>
                 <input
                   value={editing.title}
@@ -710,17 +812,25 @@ function VideosManager({ videos, addVideo, updateVideo, deleteVideo, updateVideo
                   placeholder="Title"
                 />
                 <input
-                  value={editing.subtitle}
-                  onChange={(e) => setEditing({ ...editing, subtitle: e.target.value })}
-                  placeholder="Subtitle"
+                  value={editing.description || ''}
+                  onChange={(e) => setEditing({ ...editing, description: e.target.value })}
+                  placeholder="Note (optional)"
                 />
-                <input
-                  value={editing.youtubeUrl}
-                  onChange={(e) => setEditing({ ...editing, youtubeUrl: e.target.value })}
-                  placeholder="YouTube URL"
-                />
+                <div className="media-input-group">
+                  <input
+                    value={editing.imageUrl || ''}
+                    onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })}
+                    placeholder="Cover Image URL (optional)"
+                  />
+                  <FileUpload
+                    accept="image/*"
+                    label="Upload Cover"
+                    githubToken={githubToken}
+                    onUpload={(url) => setEditing({ ...editing, imageUrl: url })}
+                  />
+                </div>
                 <div className="item-actions">
-                  <button onClick={() => handleUpdate(video.id)}>Save</button>
+                  <button onClick={() => handleUpdate(game.id)}>Save</button>
                   <button onClick={() => setEditing(null)}>Cancel</button>
                 </div>
               </>
@@ -728,16 +838,16 @@ function VideosManager({ videos, addVideo, updateVideo, deleteVideo, updateVideo
               <>
                 <div className="reorder-buttons">
                   <button onClick={() => moveItem(index, -1)} disabled={index === 0} className="btn-reorder" title="Move up">▲</button>
-                  <button onClick={() => moveItem(index, 1)} disabled={index === videos.length - 1} className="btn-reorder" title="Move down">▼</button>
+                  <button onClick={() => moveItem(index, 1)} disabled={index === games.length - 1} className="btn-reorder" title="Move down">▼</button>
                 </div>
                 <div className="item-info">
-                  <strong>{video.title}</strong>
-                  <span className="item-meta">{video.subtitle}</span>
-                  <span className="item-meta item-url">{video.youtubeUrl}</span>
+                  <strong>{game.title}</strong>
+                  {game.description && <p>{game.description}</p>}
+                  {game.imageUrl && <span className="item-meta item-url">Cover: {game.imageUrl}</span>}
                 </div>
                 <div className="item-actions">
-                  <button onClick={() => setEditing({ ...video })}>Edit</button>
-                  <button onClick={() => deleteVideo(video.id)} className="btn-danger">Delete</button>
+                  <button onClick={() => setEditing({ ...game })}>Edit</button>
+                  <button onClick={() => deleteGame(game.id)} className="btn-danger">Delete</button>
                 </div>
               </>
             )}

@@ -1,4 +1,4 @@
-const GITHUB_REPO = 'maebowl/tylerrichardson'
+const GITHUB_REPO = 'maebowl/tyler-site'
 const DATA_FILE_PATH = 'src/data/siteData.jsx'
 const UPLOADS_PATH = 'public/uploads'
 

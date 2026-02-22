@@ -115,6 +115,18 @@ const defaultData = {
           "description": "What if Mario 64 but not old?",
           "imageUrl": "https://wallpaperaccess.com/full/2146096.jpg",
           "id": 6
+      },
+      {
+          "title": "Peggle",
+          "description": "Why the hell is this game good",
+          "imageUrl": "https://www.speedrun.com/static/game/9doromdp/cover.png?v=4471794",
+          "id": 7
+      },
+      {
+          "title": "Portal 2",
+          "description": "[Insert joke about the number 3 here]",
+          "imageUrl": "https://assets.vg247.com/current/2011/01/portalwmacpft_jpg_jpgcopy.jpg",
+          "id": 8
       }
   ],
   projects: [

@@ -206,19 +206,6 @@ const defaultData = {
   ],
   posts: [
       {
-          "slug": "got-a-record-player",
-          "title": "I got a record player!",
-          "date": "2026-01-11",
-          "excerpt": "It go spinny",
-          "content": "So... Fangamer sells vinyl records. I feel like that's all the explanation needed to understand why I got this thing. I found it used for around $150, and despite the delays (Fangamer was backed up after Christmas), the records got here first. \n<br>\nIf you know anything about me, you know OneShot is my favorite game of all time. As much as I love it, I have to admit that the OST isn't that solid. Even so, I felt like this had to be my first record. And honestly? It's great. I love listening to it, even if the Hollow Knight vinyl might have been a better pick.\n<br>\nAs for the record player itself, the needle sometimes gets stuck and starts skipping, but that's really the only problem; it looks and plays fantastically. (yes, I know I cleaned it wrong in the video, I was holding my phone to record. Sorry for not having three hands.) \n<br>\nThe only problem is that... I don't have powered speakers, or an open outlet I could plug them into. No big deal, the player is set up right next to my TV, so I can just use its composite input. But… that requires a video signal as well, so whenever I want to listen to my records, I have to power on my SNES. Naturally. Is it a bit of a gimped setup? Definitely. Does it work? It sure does.\n<br>\nI'm not exactly sure how I feel about vinyl as a medium. It's cool and all, but it doesn't really feel as premium as I thought, and it doesn't sound different enough for me to really want all my music to be on vinyl when I could just... <i>VERY LEGALLY</i> get mp3s of all my music instead. But hey, maybe I just need to get an OST I care more about. I'll stick with it for a bit longer, I guess.",
-          "media": [
-              {
-                  "type": "image",
-                  "url": "/uploads/1772465382081-IMG_7631.jpeg"
-              }
-          ]
-      },
-      {
           "slug": "mar-2026-game-update",
           "title": "March 2026 Game Collection Update",
           "date": "2026-03-02",
@@ -232,6 +219,19 @@ const defaultData = {
               {
                   "type": "image",
                   "url": "/uploads/1772465523055-IMG_7630.jpeg"
+              }
+          ]
+      },
+      {
+          "slug": "got-a-record-player",
+          "title": "I got a record player!",
+          "date": "2026-01-11",
+          "excerpt": "It go spinny",
+          "content": "So... Fangamer sells vinyl records. I feel like that's all the explanation needed to understand why I got this thing. I found it used for around $150, and despite the delays (Fangamer was backed up after Christmas), the records got here first. \n<br><br>\nIf you know anything about me, you know OneShot is my favorite game of all time. As much as I love it, I have to admit that the OST isn't that solid. Even so, I felt like this had to be my first record. And honestly? It's great. I love listening to it, even if the Hollow Knight record might have been a better pick.\n<br><br>\nAs for the record player itself, the needle sometimes gets stuck and starts skipping, but that's really the only problem; it looks and plays great.\n<br><br>\nThe only problem is that... I don't have powered speakers, or an open outlet I could plug them into. No big deal, the player is set up right next to my TV, so I can just use its composite input. But… that requires a video signal as well, so whenever I want to listen to my records, I have to power on my SNES. Naturally. Is it a bit of a gimped setup? Definitely. Does it work? It sure does.\n<br><br>\nI'm not exactly sure how I feel about vinyl as a medium. It's cool and all, but it doesn't really feel as premium as I thought, and it doesn't sound different enough for me to really want all my music to be on vinyl when I could just... <i>VERY LEGALLY</i> get mp3s of all my music instead. But hey, maybe I just need to get an OST I care more about. I'll stick with it for a bit longer, I guess.",
+          "media": [
+              {
+                  "type": "image",
+                  "url": "/uploads/1772465382081-IMG_7631.jpeg"
               }
           ]
       }

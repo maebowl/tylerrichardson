@@ -45,12 +45,50 @@ function Music() {
 
   return (
     <div className="music-page">
+      {/* NOW PLAYING ticker */}
+      <div className="now-playing-bar" aria-hidden="true">
+        <span className="now-playing-label">NOW PLAYING</span>
+        <div className="ticker-track">
+          <span className="ticker-content">
+            {displaySongs.map(s => `${s.title} — ${s.artist}`).join('   ★   ')}
+            &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+          </span>
+          <span className="ticker-content">
+            {displaySongs.map(s => `${s.title} — ${s.artist}`).join('   ★   ')}
+            &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+          </span>
+        </div>
+      </div>
       <div className="page-container">
         <header className="page-header">
-          <h1 className="page-title">{siteSettings.music.title}</h1>
-          <p className="page-intro">
-            {siteSettings.music.intro}
-          </p>
+          <div className="vinyl-header">
+            <div className="vinyl-disc" aria-hidden="true">
+              <div className="vinyl-groove"></div>
+              <div className="vinyl-label"></div>
+            </div>
+            <div className="header-text">
+              <h1 className="page-title">{siteSettings.music.title}</h1>
+              <p className="page-intro">
+                {siteSettings.music.intro}
+              </p>
+            </div>
+          </div>
+          <div className="equalizer-decoration" aria-hidden="true">
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+            <span className="eq-bar"></span>
+          </div>
+          <div className="track-count" aria-hidden="true">
+            {displaySongs.length} TRACKS // SIDE A // {new Date().getFullYear()}
+          </div>
         </header>
         <div className="songs-grid">
           {displaySongs.map((song, index) => {
@@ -85,8 +123,14 @@ function Music() {
                   )}
                 </div>
                 <div className="song-details">
-                  <span className="song-title">{song.title}</span>
-                  <span className="song-artist">{song.artist}</span>
+                  <span className="track-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <div className="song-text">
+                    <span className="song-title">{song.title}</span>
+                    <span className="song-artist">{song.artist}</span>
+                  </div>
+                  <div className="waveform" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span>
+                  </div>
                 </div>
               </div>
             )

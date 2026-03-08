@@ -69,12 +69,31 @@ function Contact() {
 
   return (
     <div className="contact-page">
+      {/* Radar background decoration */}
+      <div className="radar-container" aria-hidden="true">
+        <div className="radar-circle radar-circle-1"></div>
+        <div className="radar-circle radar-circle-2"></div>
+        <div className="radar-circle radar-circle-3"></div>
+        <div className="radar-sweep"></div>
+        <div className="radar-center-dot"></div>
+      </div>
       <div className="page-container">
         <header className="page-header">
           <h1 className="page-title">{siteSettings.contact.title}</h1>
           <p className="page-intro">
             {siteSettings.contact.intro}
           </p>
+          <div className="signal-status" aria-hidden="true">
+            <span className="signal-bars">
+              <span className="bar-1"></span>
+              <span className="bar-2"></span>
+              <span className="bar-3"></span>
+              <span className="bar-4"></span>
+            </span>
+            <span className="signal-text">SIGNAL STRONG</span>
+            <span className="signal-dot"></span>
+            <span className="signal-text">{otherSocials.length + 1} NODES ONLINE</span>
+          </div>
         </header>
 
         {/* Featured Card */}
@@ -89,6 +108,7 @@ function Contact() {
             <div className="featured-content">
               <div className="featured-icon-wrapper">
                 {socialIcons[featuredSocial.id]}
+                <span className="online-dot featured-dot" aria-hidden="true"></span>
               </div>
               <div className="featured-info">
                 <span className="featured-tagline">{getTagline(featuredSocial.id)}</span>
@@ -122,6 +142,7 @@ function Contact() {
               <div className="card-content">
                 <div className="social-icon-wrapper">
                   {socialIcons[social.id]}
+                  <span className="online-dot" aria-hidden="true"></span>
                 </div>
                 <div className="social-info">
                   <span className="social-tagline">{getTagline(social.id)}</span>
@@ -141,6 +162,7 @@ function Contact() {
         {/* Badges Section */}
         {siteSettings.contact.badges && siteSettings.contact.badges.length > 0 && (
           <div className="badges-section">
+            <div className="badges-header" aria-hidden="true">─── LINKS.exe ───</div>
             <div className="badges-grid">
               {siteSettings.contact.badges.map((badge, index) => (
                 badge.url ? (

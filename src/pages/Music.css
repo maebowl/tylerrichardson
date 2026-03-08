@@ -1,11 +1,157 @@
 .music-page {
   padding: 8rem 2rem 6rem;
   min-height: 100vh;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 39px,
+    rgba(232, 135, 135, 0.03) 39px,
+    rgba(232, 135, 135, 0.03) 40px
+  );
+}
+
+/* NOW PLAYING ticker bar */
+.now-playing-bar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(20, 20, 30, 0.9);
+  border-bottom: 1px solid rgba(232, 135, 135, 0.2);
+  display: flex;
+  align-items: center;
+  z-index: 90;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.now-playing-label {
+  font-family: 'VT323', monospace;
+  font-size: 0.75rem;
+  color: var(--page-accent);
+  padding: 0 0.75rem;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-shadow: 0 0 8px rgba(232, 135, 135, 0.5);
+  animation: blink-slow 2s ease-in-out infinite;
+}
+
+.ticker-track {
+  display: flex;
+  overflow: hidden;
+  flex: 1;
+}
+
+.ticker-content {
+  font-family: 'VT323', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  letter-spacing: 1px;
+  animation: ticker-scroll 30s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Vinyl disc in header */
+.vinyl-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.vinyl-disc {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #1a1a2e 0deg,
+    #2d2d44 30deg,
+    #1a1a2e 60deg,
+    #2d2d44 90deg,
+    #1a1a2e 120deg,
+    #2d2d44 150deg,
+    #1a1a2e 180deg,
+    #2d2d44 210deg,
+    #1a1a2e 240deg,
+    #2d2d44 270deg,
+    #1a1a2e 300deg,
+    #2d2d44 330deg,
+    #1a1a2e 360deg
+  );
+  position: relative;
+  flex-shrink: 0;
+  animation: vinyl-spin 4s linear infinite;
+  box-shadow: 0 0 20px rgba(232, 135, 135, 0.15);
+}
+
+.vinyl-groove {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 255, 255, 0.02),
+    inset 0 0 0 8px rgba(255, 255, 255, 0.03),
+    inset 0 0 0 12px rgba(255, 255, 255, 0.02),
+    inset 0 0 0 16px rgba(255, 255, 255, 0.03);
+}
+
+.vinyl-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--page-accent);
+  box-shadow: 0 0 8px rgba(232, 135, 135, 0.4);
+}
+
+.vinyl-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+}
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.header-text {
+  flex: 1;
+}
+
+/* Track count line */
+.track-count {
+  font-family: 'VT323', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-top: 0.75rem;
+  opacity: 0;
+  animation: fade-in 0.5s ease-out 0.6s forwards;
 }
 
 .music-page .page-container {
   max-width: 1000px;
   margin: 0 auto;
+  padding-top: 28px;
 }
 
 .music-page .page-header {
@@ -15,8 +161,8 @@
 
 .music-page .page-title {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 400;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
@@ -24,6 +170,54 @@
 .music-page .page-intro {
   font-size: 1.125rem;
   color: var(--text-dim);
+}
+
+/* Animated equalizer bars - bigger */
+.equalizer-decoration {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 28px;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fade-in 0.6s ease-out 0.5s forwards;
+}
+
+.eq-bar {
+  width: 4px;
+  background: var(--page-accent);
+  border-radius: 1px;
+  animation: eq-bounce 1.2s ease-in-out infinite;
+}
+
+.eq-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+.eq-bar:nth-child(2) { height: 20px; animation-delay: 0.15s; }
+.eq-bar:nth-child(3) { height: 14px; animation-delay: 0.3s; }
+.eq-bar:nth-child(4) { height: 28px; animation-delay: 0.1s; }
+.eq-bar:nth-child(5) { height: 12px; animation-delay: 0.25s; }
+.eq-bar:nth-child(6) { height: 18px; animation-delay: 0.05s; }
+.eq-bar:nth-child(7) { height: 8px; animation-delay: 0.2s; }
+.eq-bar:nth-child(8) { height: 22px; animation-delay: 0.35s; }
+.eq-bar:nth-child(9) { height: 16px; animation-delay: 0.12s; }
+.eq-bar:nth-child(10) { height: 24px; animation-delay: 0.28s; }
+.eq-bar:nth-child(11) { height: 10px; animation-delay: 0.18s; }
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+/* Alternating card tilt */
+.song-card:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.song-card:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.song-card:hover {
+  transform: translateY(-2px) rotate(0deg) !important;
 }
 
 /* Songs Grid */
@@ -35,20 +229,28 @@
 
 .song-card {
   background: var(--bg-secondary);
-  border-radius: 12px;
+  border-radius: 4px;
+  border: 1px dashed var(--bg-tertiary);
   overflow: hidden;
   opacity: 0;
-  animation: slide-in 0.5s ease-out forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: card-enter 0.5s ease-out forwards;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+.song-card:nth-child(1) { animation-delay: 0s; }
+.song-card:nth-child(2) { animation-delay: 0.1s; }
+.song-card:nth-child(3) { animation-delay: 0.15s; }
+.song-card:nth-child(4) { animation-delay: 0.2s; }
+.song-card:nth-child(5) { animation-delay: 0.25s; }
+.song-card:nth-child(6) { animation-delay: 0.3s; }
 
 .song-card.has-video {
   cursor: pointer;
 }
 
 .song-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--page-accent);
+  box-shadow: 0 0 15px rgba(232, 135, 135, 0.2);
 }
 
 .song-card:hover .play-overlay {
@@ -119,14 +321,31 @@
 
 /* Song Details */
 .song-details {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.track-number {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  color: var(--page-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+
+.song-text {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.125rem;
 }
 
 .song-title {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: var(--text-primary);
   white-space: nowrap;
@@ -135,12 +354,52 @@
 }
 
 .song-artist {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-dim);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.song-artist::before {
+  content: '♫ ';
+  color: var(--page-accent);
+  opacity: 0.7;
+}
+
+/* Mini waveform visualization */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.waveform span {
+  width: 2px;
+  background: var(--page-accent);
+  border-radius: 1px;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.waveform span:nth-child(1) { height: 4px; }
+.waveform span:nth-child(2) { height: 10px; }
+.waveform span:nth-child(3) { height: 6px; }
+.waveform span:nth-child(4) { height: 14px; }
+.waveform span:nth-child(5) { height: 8px; }
+
+.song-card:hover .waveform span {
+  opacity: 0.8;
+  animation: eq-bounce 0.8s ease-in-out infinite;
+}
+
+.song-card:hover .waveform span:nth-child(1) { animation-delay: 0s; }
+.song-card:hover .waveform span:nth-child(2) { animation-delay: 0.1s; }
+.song-card:hover .waveform span:nth-child(3) { animation-delay: 0.2s; }
+.song-card:hover .waveform span:nth-child(4) { animation-delay: 0.05s; }
+.song-card:hover .waveform span:nth-child(5) { animation-delay: 0.15s; }
 
 /* Video Modal */
 .video-modal-overlay {
@@ -160,7 +419,9 @@
 
 .video-modal {
   background: var(--bg-secondary);
-  border-radius: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--page-accent);
+  box-shadow: 0 0 30px rgba(232, 135, 135, 0.15);
   max-width: 900px;
   width: 100%;
   overflow: hidden;
@@ -231,8 +492,35 @@
     padding: 6rem 1.5rem 4rem;
   }
 
+  .now-playing-bar {
+    top: 50px;
+    height: 24px;
+  }
+
+  .music-page .page-container {
+    padding-top: 24px;
+  }
+
+  .vinyl-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .vinyl-disc {
+    width: 60px;
+    height: 60px;
+  }
+
   .music-page .page-title {
     font-size: 2rem;
+  }
+
+  .equalizer-decoration {
+    justify-content: center;
+  }
+
+  .track-count {
+    text-align: center;
   }
 
   .songs-grid {
@@ -252,6 +540,10 @@
   .play-button {
     width: 48px;
     height: 48px;
+  }
+
+  .waveform {
+    display: none;
   }
 
   .video-modal-overlay {

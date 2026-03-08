@@ -15,6 +15,35 @@
 
 .hero-text {
   animation: fade-in 0.8s ease-out;
+  padding: 0 1rem;
+}
+
+/* ASCII border frame */
+.hero-ascii-border {
+  font-family: 'VT323', monospace;
+  color: var(--bg-tertiary);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0;
+  animation: ascii-reveal 1s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.hero-ascii-border.bottom {
+  animation-delay: 0.6s;
+}
+
+@keyframes ascii-reveal {
+  from {
+    opacity: 0;
+    max-width: 0;
+  }
+  to {
+    opacity: 1;
+    max-width: 100%;
+  }
 }
 
 .hero-greeting {
@@ -22,15 +51,33 @@
   color: var(--accent-primary);
   margin-bottom: 0.5rem;
   font-weight: 500;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.hero-greeting::before {
+  content: '> ';
 }
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: 5rem;
+  font-weight: 400;
   color: var(--text-primary);
   margin-bottom: 1rem;
   line-height: 1.1;
+  text-shadow: 0 0 20px rgba(130, 135, 225, 0.3), 0 0 60px rgba(130, 135, 225, 0.1);
+  animation: title-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+  from {
+    text-shadow: 0 0 20px rgba(130, 135, 225, 0.3), 0 0 60px rgba(130, 135, 225, 0.1);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(130, 135, 225, 0.5), 0 0 80px rgba(130, 135, 225, 0.2);
+  }
 }
 
 .hero-subtitle {
@@ -45,6 +92,44 @@
   color: var(--text-dim);
   max-width: 600px;
   line-height: 1.8;
+}
+
+/* Status bar */
+.hero-status-bar {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  opacity: 0;
+  animation: fade-in 0.8s ease-out 1s forwards;
+}
+
+.status-item {
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.status-item.blink-slow {
+  color: #4ade80;
+  animation: blink-slow 2s ease-in-out infinite;
+}
+
+@keyframes blink-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.blink-cursor {
+  color: var(--accent-primary);
+  font-weight: 400;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .scroll-indicator {
@@ -91,7 +176,7 @@
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .hero-subtitle {
@@ -100,6 +185,15 @@
 
   .hero-description {
     font-size: 1rem;
+  }
+
+  .hero-ascii-border {
+    font-size: 0.7rem;
+  }
+
+  .hero-status-bar {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .scroll-indicator {

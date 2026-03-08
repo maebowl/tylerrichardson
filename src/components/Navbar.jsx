@@ -51,6 +51,8 @@ function Navbar() {
     }
   }
 
+  const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
+
   return (
     <>
       <div
@@ -60,7 +62,7 @@ function Navbar() {
       <nav className={`navbar ${hidden ? 'navbar-hidden' : ''}`}>
         <div className="navbar-content">
           <Link to="/" className="nav-logo" onClick={handleLogoClick}>
-            TR
+            [TR]
           </Link>
           <button
             className={`menu-toggle ${menuOpen ? 'open' : ''}`}
@@ -71,11 +73,11 @@ function Navbar() {
             <span className="bar"></span>
           </button>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <li><Link to="/projects" onClick={closeMenu}>Blender</Link></li>
-            <li><Link to="/games" onClick={closeMenu}>Games</Link></li>
-            <li><Link to="/music" onClick={closeMenu}>Music</Link></li>
-            <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
-            <li><Link to="/blog" onClick={closeMenu}>Blog</Link></li>
+            <li><Link to="/projects" onClick={closeMenu} className={isActive('/projects') ? 'active' : ''}>Blender</Link></li>
+            <li><Link to="/games" onClick={closeMenu} className={isActive('/games') ? 'active' : ''}>Games</Link></li>
+            <li><Link to="/music" onClick={closeMenu} className={isActive('/music') ? 'active' : ''}>Music</Link></li>
+            <li><Link to="/contact" onClick={closeMenu} className={isActive('/contact') ? 'active' : ''}>Contact</Link></li>
+            <li><Link to="/blog" onClick={closeMenu} className={isActive('/blog') ? 'active' : ''}>Blog</Link></li>
           </ul>
         </div>
       </nav>

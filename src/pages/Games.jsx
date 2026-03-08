@@ -24,36 +24,52 @@ function Games() {
         <header className="page-header">
           <h1 className="page-title">{siteSettings.games?.title || 'Games'}</h1>
           <p className="page-intro">{siteSettings.games?.intro || 'Some of my favorite games.'}</p>
+          <div className="arcade-hud" aria-hidden="true">
+            <span className="hud-hearts">♥♥♥</span>
+            <span className="hud-score">SCORE: {String(games.length * 1337).padStart(8, '0')}</span>
+            <span className="hud-level">LVL {games.length}</span>
+          </div>
         </header>
-        <div className="games-grid">
-          {games.length === 0 ? (
-            <p className="no-games">No games added yet.</p>
-          ) : (
-            games.map((game, index) => (
-              <div
-                key={game.id}
-                className="game-card"
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => setActiveGame(game)}
-              >
-                <div className="game-cover">
-                  {game.imageUrl ? (
-                    <img src={game.imageUrl} alt={game.title} className="game-cover-img" />
-                  ) : (
-                    <div className="game-cover-placeholder">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="game-icon">
-                        <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                      </svg>
+        <div className="arcade-screen">
+          <div className="screen-bezel">
+            <div className="bezel-corner bezel-tl" aria-hidden="true"></div>
+            <div className="bezel-corner bezel-tr" aria-hidden="true"></div>
+            <div className="bezel-corner bezel-bl" aria-hidden="true"></div>
+            <div className="bezel-corner bezel-br" aria-hidden="true"></div>
+            <div className="screen-scanlines" aria-hidden="true"></div>
+            <div className="games-grid">
+              {games.length === 0 ? (
+                <p className="no-games">[ no games found... check back later ]</p>
+              ) : (
+                games.map((game, index) => (
+                  <div
+                    key={game.id}
+                    className="game-card"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => setActiveGame(game)}
+                  >
+                    <div className="game-cover">
+                      {game.imageUrl ? (
+                        <img src={game.imageUrl} alt={game.title} className="game-cover-img" />
+                      ) : (
+                        <div className="game-cover-placeholder">
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="game-icon">
+                            <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                          </svg>
+                        </div>
+                      )}
+                      <div className="game-scanline-overlay" aria-hidden="true"></div>
                     </div>
-                  )}
-                </div>
-                <div className="game-info">
-                  <h3 className="game-title">{game.title}</h3>
-                  {game.description && <p className="game-description">{game.description}</p>}
-                </div>
-              </div>
-            ))
-          )}
+                    <div className="game-info">
+                      <h3 className="game-title">{game.title}</h3>
+                      {game.description && <p className="game-description">{game.description}</p>}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            <div className="insert-coin" aria-hidden="true">INSERT COIN</div>
+          </div>
         </div>
       </div>
 

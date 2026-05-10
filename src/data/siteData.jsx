@@ -206,19 +206,15 @@ const defaultData = {
   ],
   posts: [
       {
-          "slug": "mar-2026-game-update",
-          "title": "March 2026 Game Collection Update",
-          "date": "2026-03-02",
-          "excerpt": "I only got 1 game in February lol",
-          "content": "Hello! This is the first one of these I’ve done, but i plan to do monthly updates on the state of my game collection. Since February, i’ve only gotten 1 game, Donkey Kong Country, so i’ll more so use this as an opportunity to talk about the rest of my collection. \n<br><br>\nI’m fortunate enough to have had enough money saved up to afford a Switch 2 a few months after launch, which means my Switch 1 is collecting dust in a carrying case in my closet right now. Most of the consoles i own, actually, came down to luck; my friend wanted to trade me his PS3 for my 3DS, My cousin had a Wii he wasn’t using, and another friend of mine stumbled across a GameCube in his attic that he had no use for. The rest of these guys were deliberate purchases. I’ve still got an open shelf spot, which i plan to put an NES into, but that is in no way a priority.\n<br><br>\nThe main reason that there’s not much new stuff is because i’ve had a ton of other projects i’ve been working on, which i plan to show off once they’re done. They’ve taken up a lot of my time and money, so i haven’t had much of a chance to work on my game library (especially with me also starting to collect records).\n<br><br>\nThe stuff that is there, though, is pretty damn cool. I’m really happy with almost everything i own. Almost. There are a couple of dumb games in the collection that you might notice, and yeah, i don’t really know why i own them. It’s kind of funny, i guess? But yeah, Family Party: 30 Great Games isn’t quite a highlight of my financial responsibility. I’m still happy with most of the games here; they all have their place in gaming history. There’s more i still want to get, but as of right now? I’ve got plenty.",
+          "slug": "built-arcade-cocktail-table",
+          "title": "I built an arcade table!",
+          "date": "2026-05-10",
+          "excerpt": "Holy crap this was a lot of work",
+          "content": "So yeah, this is pretty cool. I started this project pretty much exactly a year ago with my dad (i remember making jokes about it being a Mother’s Day gift), but we sort of procrastinated on the last few parts of it until about a week ago. We started by getting all the computer stuff we needed - it’s powered by a Raspberry Pi, with a cheap LG TV as the screen and (sort of crappy) EG Starts arcade buttons and joysticks. We built a wood skeleton of what we wanted the table to generally be shaped like, then we made the sides out of a high-quality plywood. This is where the first of our two breaks began; it looked really good already, and while it’d look even better with a vinyl wrap, that was terrifying because we’d never done it before. Eventually, though, we put a carbon-fiber vinyl wrap on all the sides… and when we got to the buttons we once again took a break. It was way more complicated than “put vinyl on flat surface”, and we were once again nervous to alter something that already looked good. But we finally got back to it, and here’s the finished product! I’m super happy with how it turned out, and the software side is no different. We have a heavily altered distribution of RetroPie in which both the games and the menu itself had to be flipped 90 degrees. There’s also a mirror shader to the games, so both players see the same thing. It took a lot of work and customization, but this thing we never use is definitely probably worth it maybe.",
           "media": [
               {
                   "type": "image",
-                  "url": "/uploads/1772465509282-IMG_7629.jpeg"
-              },
-              {
-                  "type": "image",
-                  "url": "/uploads/1772465523055-IMG_7630.jpeg"
+                  "url": "/uploads/1778449967946-IMG_8012.jpeg"
               }
           ]
       },

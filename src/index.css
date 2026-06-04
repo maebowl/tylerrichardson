@@ -137,6 +137,7 @@ a:hover {
 .games-page { --page-accent: #8fbfa0; }
 .blog-page { --page-accent: #d6a874; }
 .projects-page { --page-accent: #8bb3cf; }
+.rlprojects-page { --page-accent: #84bdc4; }
 .contact-page { --page-accent: #b4a3d4; }
 
 /* Page-specific title colors */

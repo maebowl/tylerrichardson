@@ -74,6 +74,7 @@ function Navbar() {
           </button>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
             <li><Link to="/projects" onClick={closeMenu} className={isActive('/projects') ? 'active' : ''}>Blender</Link></li>
+            <li><Link to="/rlprojects" onClick={closeMenu} className={isActive('/rlprojects') ? 'active' : ''}>Projects</Link></li>
             <li><Link to="/games" onClick={closeMenu} className={isActive('/games') ? 'active' : ''}>Games</Link></li>
             <li><Link to="/music" onClick={closeMenu} className={isActive('/music') ? 'active' : ''}>Music</Link></li>
             <li><Link to="/contact" onClick={closeMenu} className={isActive('/contact') ? 'active' : ''}>Contact</Link></li>

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import ThemeEffects from './components/ThemeEffects'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
+import Rlprojects from './pages/Rlprojects'
 import Music from './pages/Music'
 import Contact from './pages/Contact'
 import Games from './pages/Games'
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/rlprojects" element={<Rlprojects />} />
           <Route path="/music" element={<Music />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/games" element={<Games />} />

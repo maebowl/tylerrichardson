@@ -82,6 +82,10 @@ const defaultData = {
       "blog": {
           "title": "Blog",
           "intro": "Projects, updates, and random garbage."
+      },
+      "rlprojects": {
+          "title": "Projects",
+          "intro": "Stuff I've built outside of Blender."
       }
   },
   games: [
@@ -164,6 +168,7 @@ const defaultData = {
           "id": 4
       }
   ],
+  rlprojects: [],
   songs: [
       {
           "title": "P.A.R.T.Y.",
@@ -326,6 +331,24 @@ export function SiteDataProvider({ children }) {
     setData(prev => ({ ...prev, projects: prev.projects.filter(p => p.id !== id) }))
   }
 
+  const updateRlprojects = (rlprojects) => setData(prev => ({ ...prev, rlprojects }))
+
+  const addRlproject = (rlproject) => {
+    const id = Math.max(0, ...data.rlprojects.map(p => p.id)) + 1
+    setData(prev => ({ ...prev, rlprojects: [...prev.rlprojects, { ...rlproject, id }] }))
+  }
+
+  const updateRlproject = (id, updates) => {
+    setData(prev => ({
+      ...prev,
+      rlprojects: prev.rlprojects.map(p => p.id === id ? { ...p, ...updates } : p)
+    }))
+  }
+
+  const deleteRlproject = (id) => {
+    setData(prev => ({ ...prev, rlprojects: prev.rlprojects.filter(p => p.id !== id) }))
+  }
+
   const addSong = (song) => {
     const id = Math.max(0, ...data.songs.map(s => s.id)) + 1
     setData(prev => ({ ...prev, songs: [...prev.songs, { ...song, id }] }))
@@ -396,6 +419,7 @@ export function SiteDataProvider({ children }) {
       ...data,
       updateGames,
       updateProjects,
+      updateRlprojects,
       updateSongs,
       updatePosts,
       updateSocials,
@@ -405,6 +429,9 @@ export function SiteDataProvider({ children }) {
       addProject,
       updateProject,
       deleteProject,
+      addRlproject,
+      updateRlproject,
+      deleteRlproject,
       addSong,
       updateSong,
       deleteSong,

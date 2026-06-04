@@ -21,10 +21,11 @@ function Admin() {
   const [saveStatus, setSaveStatus] = useState('')
 
   const {
-    siteSettings, games, projects, songs, posts, socials,
+    siteSettings, games, projects, rlprojects, songs, posts, socials,
     updateSiteSettings,
     updateGames, addGame, updateGame, deleteGame,
     updateProjects, addProject, updateProject, deleteProject,
+    updateRlprojects, addRlproject, updateRlproject, deleteRlproject,
     updateSongs, addSong, updateSong, deleteSong,
     updatePosts, addPost, updatePost, deletePost,
     updateSocials, updateSocial, resetToDefaults
@@ -79,7 +80,7 @@ function Admin() {
     setSaveStatus('')
 
     try {
-      await saveToGitHub({ siteSettings, games, projects, songs, posts, socials }, githubToken)
+      await saveToGitHub({ siteSettings, games, projects, rlprojects, songs, posts, socials }, githubToken)
       setSaveStatus('Saved to GitHub! Site will rebuild shortly.')
     } catch (err) {
       setSaveStatus(`Error: ${err.message}`)
@@ -187,6 +188,12 @@ function Admin() {
             Blender
           </button>
           <button
+            className={`tab ${activeTab === 'rlprojects' ? 'active' : ''}`}
+            onClick={() => setActiveTab('rlprojects')}
+          >
+            Projects
+          </button>
+          <button
             className={`tab ${activeTab === 'songs' ? 'active' : ''}`}
             onClick={() => setActiveTab('songs')}
           >
@@ -224,6 +231,9 @@ function Admin() {
           )}
           {activeTab === 'projects' && (
             <ProjectsManager projects={projects} addProject={addProject} updateProject={updateProject} deleteProject={deleteProject} updateProjects={updateProjects} githubToken={githubToken} />
+          )}
+          {activeTab === 'rlprojects' && (
+            <RlprojectsManager rlprojects={rlprojects} addRlproject={addRlproject} updateRlproject={updateRlproject} deleteRlproject={deleteRlproject} updateRlprojects={updateRlprojects} githubToken={githubToken} />
           )}
           {activeTab === 'songs' && (
             <SongsManager songs={songs} addSong={addSong} updateSong={updateSong} deleteSong={deleteSong} updateSongs={updateSongs} githubToken={githubToken} />
@@ -482,6 +492,29 @@ function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
             <textarea
               value={siteSettings.blog?.intro || ''}
               onChange={(e) => updateSiteSettings('blog', { intro: e.target.value })}
+              placeholder="Page introduction..."
+              rows={2}
+            />
+          </label>
+        </div>
+      </div>
+
+      <div className="settings-section">
+        <h3>Projects Page (non-Blender)</h3>
+        <div className="settings-fields">
+          <label>
+            <span>Title</span>
+            <input
+              value={siteSettings.rlprojects?.title || ''}
+              onChange={(e) => updateSiteSettings('rlprojects', { title: e.target.value })}
+              placeholder="Projects"
+            />
+          </label>
+          <label>
+            <span>Intro Text</span>
+            <textarea
+              value={siteSettings.rlprojects?.intro || ''}
+              onChange={(e) => updateSiteSettings('rlprojects', { intro: e.target.value })}
               placeholder="Page introduction..."
               rows={2}
             />
@@ -1020,6 +1053,147 @@ function ProjectsManager({ projects, addProject, updateProject, deleteProject, u
                 <div className="item-actions">
                   <button onClick={() => setEditing({ ...project })}>Edit</button>
                   <button onClick={() => deleteProject(project.id)} className="btn-danger">Delete</button>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function RlprojectsManager({ rlprojects, addRlproject, updateRlproject, deleteRlproject, updateRlprojects, githubToken }) {
+  const [editing, setEditing] = useState(null)
+  const [newProject, setNewProject] = useState({ title: '', description: '', imageUrl: '', videoUrl: '' })
+
+  const handleAdd = () => {
+    if (!newProject.title) return
+    addRlproject(newProject)
+    setNewProject({ title: '', description: '', imageUrl: '', videoUrl: '' })
+  }
+
+  const handleUpdate = (id) => {
+    updateRlproject(id, editing)
+    setEditing(null)
+  }
+
+  const moveItem = (index, direction) => {
+    const newIndex = index + direction
+    if (newIndex < 0 || newIndex >= rlprojects.length) return
+    const next = [...rlprojects]
+    const [removed] = next.splice(index, 1)
+    next.splice(newIndex, 0, removed)
+    updateRlprojects(next)
+  }
+
+  return (
+    <div className="manager">
+      <h2>Projects</h2>
+      <p className="manager-note">Non-Blender projects. Upload images or MP4 videos, or paste a URL. Video takes priority if both are set.</p>
+
+      <div className="add-form">
+        <h3>Add New Project</h3>
+        <input
+          placeholder="Title"
+          value={newProject.title}
+          onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
+        />
+        <input
+          placeholder="Description"
+          value={newProject.description}
+          onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+        />
+        <div className="media-input-group">
+          <input
+            placeholder="Image URL (optional)"
+            value={newProject.imageUrl}
+            onChange={(e) => setNewProject({ ...newProject, imageUrl: e.target.value })}
+          />
+          <FileUpload
+            accept="image/*"
+            label="Upload Image"
+            githubToken={githubToken}
+            onUpload={(url) => setNewProject({ ...newProject, imageUrl: url })}
+          />
+        </div>
+        <div className="media-input-group">
+          <input
+            placeholder="Video URL (MP4/WebM/MKV, optional)"
+            value={newProject.videoUrl}
+            onChange={(e) => setNewProject({ ...newProject, videoUrl: e.target.value })}
+          />
+          <FileUpload
+            accept="video/mp4,video/webm,video/x-matroska,.mkv"
+            label="Upload Video"
+            githubToken={githubToken}
+            onUpload={(url) => setNewProject({ ...newProject, videoUrl: url })}
+          />
+        </div>
+        <button onClick={handleAdd}>Add Project</button>
+      </div>
+
+      <div className="items-list">
+        {rlprojects.map((project, index) => (
+          <div key={project.id} className="item">
+            {editing?.id === project.id ? (
+              <>
+                <input
+                  value={editing.title}
+                  onChange={(e) => setEditing({ ...editing, title: e.target.value })}
+                  placeholder="Title"
+                />
+                <input
+                  value={editing.description}
+                  onChange={(e) => setEditing({ ...editing, description: e.target.value })}
+                  placeholder="Description"
+                />
+                <div className="media-input-group">
+                  <input
+                    value={editing.imageUrl || ''}
+                    onChange={(e) => setEditing({ ...editing, imageUrl: e.target.value })}
+                    placeholder="Image URL (optional)"
+                  />
+                  <FileUpload
+                    accept="image/*"
+                    label="Upload Image"
+                    githubToken={githubToken}
+                    onUpload={(url) => setEditing({ ...editing, imageUrl: url })}
+                  />
+                </div>
+                <div className="media-input-group">
+                  <input
+                    value={editing.videoUrl || ''}
+                    onChange={(e) => setEditing({ ...editing, videoUrl: e.target.value })}
+                    placeholder="Video URL (MP4/WebM/MKV)"
+                  />
+                  <FileUpload
+                    accept="video/mp4,video/webm,video/x-matroska,.mkv"
+                    label="Upload Video"
+                    githubToken={githubToken}
+                    onUpload={(url) => setEditing({ ...editing, videoUrl: url })}
+                  />
+                </div>
+                <div className="item-actions">
+                  <button onClick={() => handleUpdate(project.id)}>Save</button>
+                  <button onClick={() => setEditing(null)}>Cancel</button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="reorder-buttons">
+                  <button onClick={() => moveItem(index, -1)} disabled={index === 0} className="btn-reorder" title="Move up">▲</button>
+                  <button onClick={() => moveItem(index, 1)} disabled={index === rlprojects.length - 1} className="btn-reorder" title="Move down">▼</button>
+                </div>
+                <div className="item-info">
+                  <strong>{project.title}</strong>
+                  <p>{project.description}</p>
+                  {project.imageUrl && <span className="item-meta item-url">Image: {project.imageUrl}</span>}
+                  {project.videoUrl && <span className="item-meta item-url">Video: {project.videoUrl}</span>}
+                </div>
+                <div className="item-actions">
+                  <button onClick={() => setEditing({ ...project })}>Edit</button>
+                  <button onClick={() => deleteRlproject(project.id)} className="btn-danger">Delete</button>
                 </div>
               </>
             )}

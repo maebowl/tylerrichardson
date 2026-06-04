@@ -41,18 +41,21 @@
 }
 
 .nav-logo {
-  font-family: var(--font-mono);
-  font-size: 1.5rem;
-  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
   color: var(--accent-primary);
   text-decoration: none;
-  letter-spacing: 2px;
-  text-shadow: 0 0 8px rgba(130, 135, 225, 0.3);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .nav-logo:hover {
-  color: var(--accent-hover);
+  opacity: 0.8;
+}
+
+.nav-logo-icon {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 
 .nav-links {

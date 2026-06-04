@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { getPageIconKey, PAGE_ICONS, makeFaviconDataUri } from '../pageIcons'
 import './Navbar.css'
 
 function Navbar() {
@@ -8,6 +9,20 @@ function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0)
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const iconKey = getPageIconKey(location.pathname)
+  const pageIcon = PAGE_ICONS[iconKey]
+
+  // Swap the browser-tab favicon to match the current page
+  useEffect(() => {
+    let link = document.querySelector("link[rel='icon']")
+    if (!link) {
+      link = document.createElement('link')
+      link.rel = 'icon'
+      document.head.appendChild(link)
+    }
+    link.setAttribute('type', 'image/svg+xml')
+    link.setAttribute('href', makeFaviconDataUri(iconKey))
+  }, [iconKey])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,8 +76,17 @@ function Navbar() {
       />
       <nav className={`navbar ${hidden ? 'navbar-hidden' : ''}`}>
         <div className="navbar-content">
-          <Link to="/" className="nav-logo" onClick={handleLogoClick}>
-            [TR]
+          <Link to="/" className="nav-logo" onClick={handleLogoClick} aria-label="Home" title={pageIcon.label}>
+            <svg
+              className="nav-logo-icon"
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+              aria-hidden="true"
+              style={{ color: pageIcon.color }}
+            >
+              <path d={pageIcon.path} fill="currentColor" fillRule={pageIcon.fillRule || 'nonzero'} />
+            </svg>
           </Link>
           <button
             className={`menu-toggle ${menuOpen ? 'open' : ''}`}

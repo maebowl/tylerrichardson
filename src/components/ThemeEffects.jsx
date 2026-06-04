@@ -94,7 +94,14 @@ function ThemeBadge({ theme, themes }) {
 
   return (
     <div className="theme-badge">
-      <span className="theme-badge-icon"></span>
+      {theme === 'pride' ? (
+        <>
+          <span className="pride-flag-mini" aria-hidden="true"></span>
+          <span className="pride-intersex" aria-hidden="true" title="intersex"></span>
+        </>
+      ) : (
+        <span className="theme-badge-icon"></span>
+      )}
       <span>{themeNames[theme] || themes[theme]?.name}</span>
     </div>
   )

@@ -141,27 +141,43 @@
   --pride-blue: #24408E;
   --pride-purple: #732982;
 
-  /* Static gradient for text - shows all colors at once */
+  /* Inclusive text gradient: trans + POC + rainbow, kept readable on the dark bg.
+     (Pure black/white stay in the stripe + badge, where they don't hurt legibility.) */
   --pride-gradient: linear-gradient(
     90deg,
-    var(--pride-red) 0%,
-    var(--pride-orange) 20%,
-    var(--pride-yellow) 40%,
-    var(--pride-green) 60%,
-    var(--pride-blue) 80%,
+    var(--pride-trans-blue) 0%,
+    var(--pride-trans-pink) 12%,
+    #FFFFFF 22%,
+    #B06A3C 33%,
+    var(--pride-red) 45%,
+    var(--pride-orange) 57%,
+    var(--pride-yellow) 68%,
+    var(--pride-green) 79%,
+    var(--pride-blue) 89%,
     var(--pride-purple) 100%
   );
 
-  /* Animated gradient for borders */
-  --pride-gradient-animated: linear-gradient(
+  /* Progress Pride additions: trans (light blue/pink/white) + POC (brown/black) */
+  --pride-trans-blue: #5BCEFA;
+  --pride-trans-pink: #F5A9B8;
+  --pride-white: #FFFFFF;
+  --pride-brown: #613915;
+  --pride-black: #000000;
+
+  /* Full Progress Pride stripe: POC + trans + the classic rainbow */
+  --pride-progress-stripe: linear-gradient(
     90deg,
-    var(--pride-red) 0%,
-    var(--pride-orange) 16.66%,
-    var(--pride-yellow) 33.33%,
-    var(--pride-green) 50%,
-    var(--pride-blue) 66.66%,
-    var(--pride-purple) 83.33%,
-    var(--pride-red) 100%
+    #000000 0 9.09%,
+    #613915 9.09% 18.18%,
+    #5BCEFA 18.18% 27.27%,
+    #F5A9B8 27.27% 36.36%,
+    #FFFFFF 36.36% 45.45%,
+    var(--pride-red) 45.45% 54.55%,
+    var(--pride-orange) 54.55% 63.64%,
+    var(--pride-yellow) 63.64% 72.73%,
+    var(--pride-green) 72.73% 81.82%,
+    var(--pride-blue) 81.82% 90.91%,
+    var(--pride-purple) 90.91% 100%
   );
 }
 
@@ -181,22 +197,15 @@
   animation: none !important;
 }
 
-/* Pride progress bar / border - slow gentle animation */
+/* Progress Pride stripe under the navbar */
 .theme-pride .navbar::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: var(--pride-gradient-animated);
-  background-size: 200% 100%;
-  animation: pride-shimmer 8s linear infinite;
-}
-
-@keyframes pride-shimmer {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  height: 5px;
+  background: var(--pride-progress-stripe);
 }
 
 /* Theme indicator badge */
@@ -231,5 +240,22 @@
 .theme-halloween .theme-badge-icon::before { content: '🎃'; }
 /* Birthday badge */
 .theme-birthday .theme-badge-icon::before { content: '🎂'; }
-/* Pride badge */
-.theme-pride .theme-badge-icon::before { content: '🏳️‍🌈'; }
+/* Pride badge - Progress Pride flag swatch + intersex ring */
+.pride-flag-mini {
+  width: 26px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--pride-progress-stripe);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.pride-intersex {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FFD800;
+  border: 2px solid #7902AA;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}

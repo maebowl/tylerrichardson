@@ -32,7 +32,7 @@ function Hero() {
 
         {currently && currently.length > 0 && (
           <aside className="hero-currently" aria-label="What I'm currently into">
-            <span className="currently-heading">// currently</span>
+            <span className="currently-heading">currently into</span>
             <ul className="currently-list">
               {currently.map((item, i) => (
                 <li key={i} className="currently-item">

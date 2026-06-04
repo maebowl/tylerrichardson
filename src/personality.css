@@ -1,0 +1,93 @@
+/* ============================================================
+   Personality layer — a little less formal & boring.
+   Handwritten accents, springy hovers, hand-drawn doodles.
+   Loaded last (main.jsx) so it wins ties. Easy to tune here.
+   ============================================================ */
+
+/* ---------- Playful hover & motion ---------- */
+/* Cards lift, tilt like a sticker, and pop — with a springy ease. */
+.project-card,
+.song-card,
+.game-card,
+.social-card,
+.featured-social,
+.post-card {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.2s ease, background 0.2s ease, opacity 0.45s ease !important;
+}
+.project-card:hover,
+.song-card:hover,
+.game-card:hover,
+.social-card:hover,
+.featured-social:hover,
+.post-card:hover {
+  transform: translateY(-5px) rotate(-1.2deg) scale(1.02) !important;
+}
+.project-card:nth-child(even):hover,
+.song-card:nth-child(even):hover,
+.game-card:nth-child(even):hover,
+.social-card:nth-child(even):hover,
+.post-card:nth-child(even):hover {
+  transform: translateY(-5px) rotate(1.2deg) scale(1.02) !important;
+}
+
+/* Hero quick-links: springy tilt-pop */
+.hero-link {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+}
+.hero-link:hover {
+  transform: translateY(-3px) rotate(-2.5deg) !important;
+  background: var(--bg-secondary) !important;
+}
+
+/* A friendly wiggle for the logo and the 88x31 badges */
+.nav-logo:hover,
+.badge-link:hover {
+  animation: wiggle-hand 0.4s ease !important;
+  animation-name: wiggle-hand !important;
+}
+@keyframes wiggle-hand {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-5deg); }
+  70% { transform: rotate(5deg); }
+}
+
+/* ---------- Hand-drawn doodle accents ---------- */
+/* Squiggle underline beneath the hero name */
+.hero-title {
+  display: inline-block;
+  position: relative;
+}
+.hero-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.32em;
+  height: 0.34em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M3 8 Q25 2 50 7 T100 7 T150 7 T197 6' fill='none' stroke='%238287e1' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  pointer-events: none;
+}
+
+/* The page-header divider becomes a hand-drawn wavy line */
+.page-header::after {
+  content: '' !important;
+  display: block !important;
+  width: 240px !important;
+  max-width: 70% !important;
+  height: 14px !important;
+  margin-top: 1rem !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='14'%3E%3Cpath d='M0 7 Q10 1 20 7 T40 7' fill='none' stroke='%237a82ab' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: repeat-x !important;
+  background-position: left center !important;
+  background-size: 40px 14px !important;
+}
+.contact-page .page-header::after { margin-left: auto !important; margin-right: auto !important; }
+
+/* Little hand-drawn star before the "currently" panel heading */
+.currently-heading::before {
+  content: '✶ ';
+  color: var(--accent-secondary);
+}

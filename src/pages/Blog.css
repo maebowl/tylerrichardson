@@ -1,141 +1,18 @@
 .blog-page {
   padding: 8rem 2rem 6rem;
   min-height: 100vh;
-  /* Subtle left margin line like notebook paper */
-  background-image: linear-gradient(
-    90deg,
-    transparent calc(50% - 362px),
-    rgba(240, 160, 80, 0.08) calc(50% - 362px),
-    rgba(240, 160, 80, 0.08) calc(50% - 360px),
-    transparent calc(50% - 360px)
-  );
 }
 
 .blog-page .section-container {
+  max-width: 800px;
+  margin: 0 auto;
   opacity: 1;
   transform: none;
 }
 
-/* Terminal window chrome */
-.terminal-window {
-  max-width: 800px;
-  margin: 0 auto;
-  border: 1px solid var(--bg-tertiary);
-  border-radius: 6px 6px 4px 4px;
-  overflow: hidden;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-}
-
-.terminal-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 1rem;
-  background: rgba(30, 30, 45, 0.8);
-  border-bottom: 1px solid var(--bg-tertiary);
-}
-
-.terminal-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dot-red { background: #ff5f57; }
-.dot-yellow { background: #febc2e; }
-.dot-green { background: #28c840; }
-
-.terminal-title {
-  font-family: 'VT323', monospace;
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  flex: 1;
-  text-align: center;
-}
-
-.terminal-titlebar-spacer {
-  width: 46px;
-}
-
-.terminal-body {
-  padding: 1.5rem 2rem 2rem;
-  background: rgba(15, 15, 25, 0.5);
-}
-
-/* Terminal prompt - fancier */
-.terminal-prompt {
-  font-family: 'VT323', monospace;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-  opacity: 0;
-  animation: fade-in 0.5s ease-out 0.2s forwards;
-}
-
-.prompt-user { color: #4ade80; }
-.prompt-at { color: var(--text-dim); }
-.prompt-host { color: #60c0f0; }
-.prompt-colon { color: var(--text-dim); }
-.prompt-path { color: var(--page-accent); }
-.prompt-dollar { color: var(--text-dim); margin: 0 0.25rem; }
-.prompt-cmd { color: var(--text-primary); }
-
-.blink-cursor {
-  animation: blink-slow 1s step-end infinite;
-}
-
-/* Terminal output lines */
-.terminal-output {
-  font-family: 'VT323', monospace;
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
-  opacity: 0;
-  animation: fade-in 0.4s ease-out 0.5s forwards;
-}
-
-.output-line {
-  display: block;
-  line-height: 1.6;
-  opacity: 0.5;
-}
-
-.terminal-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: 'VT323', monospace;
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-bottom: 2rem;
-  padding: 0.5rem 0.75rem;
-  background: rgba(240, 160, 80, 0.05);
-  border: 1px dashed rgba(240, 160, 80, 0.15);
-  border-radius: 2px;
-  opacity: 0;
-  animation: fade-in 0.5s ease-out 0.4s forwards;
-}
-
-.bar-label {
-  color: var(--page-accent);
-  font-weight: bold;
-}
-
-.bar-separator {
-  color: var(--bg-tertiary);
-}
-
-.bar-status {
-  margin-left: auto;
-  color: #4ade80;
+.blog-page .page-header {
+  margin-bottom: 3rem;
+  animation: fade-in 0.6s ease-out;
 }
 
 .blog-page .page-title {
@@ -149,7 +26,14 @@
 .blog-page .page-intro {
   font-size: 1.125rem;
   color: var(--text-dim);
-  margin-bottom: 1.5rem;
+}
+
+.post-count {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-top: 0.75rem;
 }
 
 .posts-list {
@@ -181,19 +65,11 @@
 }
 
 .post-index {
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--page-accent);
   letter-spacing: 1px;
   opacity: 0.6;
-}
-
-.post-permissions {
-  font-family: 'VT323', monospace;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  opacity: 0.3;
-  letter-spacing: 1px;
 }
 
 .section-container.animate-in .post-card {
@@ -203,9 +79,8 @@
 
 .post-card:hover {
   background: rgba(30, 30, 50, 0.8);
-  border-color: rgba(240, 160, 80, 0.3);
+  border-color: rgba(240, 160, 80, 0.25);
   border-left-color: var(--page-accent);
-  box-shadow: 0 0 15px rgba(240, 160, 80, 0.1);
 }
 
 .post-card:hover .post-read-more {
@@ -216,7 +91,7 @@
 .post-date {
   font-size: 0.8rem;
   color: var(--text-dim);
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   letter-spacing: 1px;
 }
 
@@ -241,7 +116,7 @@
 }
 
 .post-read-more {
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--page-accent);
   letter-spacing: 1px;
@@ -253,7 +128,7 @@
 
 .no-posts {
   color: var(--text-dim);
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 1.25rem;
   letter-spacing: 1px;
   line-height: 2;

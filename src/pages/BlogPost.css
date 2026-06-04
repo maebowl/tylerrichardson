@@ -13,7 +13,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   color: var(--text-dim);
   text-decoration: none;
@@ -27,73 +27,12 @@
 }
 
 .back-link::before {
-  content: '$ ';
+  content: '← ';
   color: var(--page-accent, var(--accent-primary));
-}
-
-/* Blog post terminal window */
-.post-terminal-window {
-  border: 1px solid var(--bg-tertiary);
-  border-radius: 6px 6px 4px 4px;
-  overflow: hidden;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-}
-
-.post-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 1rem;
-  background: rgba(30, 30, 45, 0.8);
-  border-bottom: 1px solid var(--bg-tertiary);
-}
-
-.post-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dot-red { background: #ff5f57; }
-.dot-yellow { background: #febc2e; }
-.dot-green { background: #28c840; }
-
-.post-titlebar-text {
-  font-family: 'VT323', monospace;
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  flex: 1;
-  text-align: center;
-}
-
-.post-titlebar-spacer {
-  width: 46px;
 }
 
 .post-content {
   animation: fade-in 0.6s ease-out;
-  padding: 2rem;
-  background: rgba(15, 15, 25, 0.5);
-}
-
-/* Terminal-style meta line */
-.post-meta-line {
-  font-family: 'VT323', monospace;
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-bottom: 0.75rem;
-  opacity: 0.6;
-}
-
-.post-meta-line .meta-tag {
-  color: #f0a050;
 }
 
 .post-header {
@@ -109,7 +48,7 @@
   color: var(--text-dim);
   display: block;
   margin-bottom: 0.75rem;
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   letter-spacing: 1px;
 }
 
@@ -324,7 +263,7 @@
 }
 
 .post-body code {
-  font-family: 'VT323', 'SF Mono', 'Fira Code', monospace;
+  font-family: var(--font-mono);
   font-size: 0.95em;
   background: var(--bg-tertiary);
   padding: 0.2em 0.4em;

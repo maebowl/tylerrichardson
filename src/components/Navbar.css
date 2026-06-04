@@ -41,7 +41,7 @@
 }
 
 .nav-logo {
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 1.5rem;
   font-weight: 400;
   color: var(--accent-primary);
@@ -53,8 +53,6 @@
 
 .nav-logo:hover {
   color: var(--accent-hover);
-  text-shadow: 0 0 12px rgba(130, 135, 225, 0.6);
-  animation: glitch 0.3s ease;
 }
 
 .nav-links {
@@ -78,7 +76,7 @@
   color: var(--accent-primary);
   opacity: 0;
   transition: opacity 0.2s ease;
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
 }
 
 .nav-links a::after {

@@ -188,6 +188,21 @@
   margin-bottom: 0.5rem;
 }
 
+.currently-edit-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.currently-edit-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.currently-edit-row input:first-child {
+  flex: 0 0 9rem;
+}
+
 .taglines-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

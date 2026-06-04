@@ -69,14 +69,6 @@ function Contact() {
 
   return (
     <div className="contact-page">
-      {/* Radar background decoration */}
-      <div className="radar-container" aria-hidden="true">
-        <div className="radar-circle radar-circle-1"></div>
-        <div className="radar-circle radar-circle-2"></div>
-        <div className="radar-circle radar-circle-3"></div>
-        <div className="radar-sweep"></div>
-        <div className="radar-center-dot"></div>
-      </div>
       <div className="page-container">
         <header className="page-header">
           <h1 className="page-title">{siteSettings.contact.title}</h1>
@@ -84,15 +76,7 @@ function Contact() {
             {siteSettings.contact.intro}
           </p>
           <div className="signal-status" aria-hidden="true">
-            <span className="signal-bars">
-              <span className="bar-1"></span>
-              <span className="bar-2"></span>
-              <span className="bar-3"></span>
-              <span className="bar-4"></span>
-            </span>
-            <span className="signal-text">SIGNAL STRONG</span>
-            <span className="signal-dot"></span>
-            <span className="signal-text">{otherSocials.length + 1} NODES ONLINE</span>
+            <span className="signal-text">{otherSocials.length + 1} places to find me</span>
           </div>
         </header>
 
@@ -104,7 +88,6 @@ function Contact() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div className="featured-glow"></div>
             <div className="featured-content">
               <div className="featured-icon-wrapper">
                 {socialIcons[featuredSocial.id]}
@@ -162,7 +145,7 @@ function Contact() {
         {/* Badges Section */}
         {siteSettings.contact.badges && siteSettings.contact.badges.length > 0 && (
           <div className="badges-section">
-            <div className="badges-header" aria-hidden="true">─── LINKS.exe ───</div>
+            <div className="badges-header" aria-hidden="true">─── links ───</div>
             <div className="badges-grid">
               {siteSettings.contact.badges.map((badge, index) => (
                 badge.url ? (

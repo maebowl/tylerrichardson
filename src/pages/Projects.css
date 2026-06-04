@@ -1,83 +1,15 @@
 .projects-page {
   padding: 8rem 2rem 6rem;
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background-image: radial-gradient(circle, rgba(96, 192, 240, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
 }
 
-/* Blueprint crosshair overlay */
-.blueprint-crosshair {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  animation: fade-in 1s ease-out 0.8s forwards;
-}
-
-.crosshair-h,
-.crosshair-v {
-  position: absolute;
-  background: rgba(96, 192, 240, 0.04);
-}
-
-.crosshair-h {
-  width: 100vw;
-  height: 1px;
-  left: -50vw;
-  top: 0;
-}
-
-.crosshair-v {
-  width: 1px;
-  height: 100vh;
-  top: -50vh;
-  left: 0;
-}
-
-/* Blueprint status line */
-.blueprint-status {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  font-family: 'VT323', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  color: var(--text-dim);
-  opacity: 0;
-  animation: fade-in 0.5s ease-out 0.4s forwards;
-}
-
-.blueprint-sep {
-  color: var(--page-accent);
-  opacity: 0.4;
-}
-
-.blueprint-date {
-  color: var(--page-accent);
-  opacity: 0.6;
-}
-
-/* Blueprint viewport status bar */
+/* Small monospace flavor line */
 .viewport-status {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  font-family: 'VT323', monospace;
-  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
   color: var(--text-dim);
   letter-spacing: 1px;
-  opacity: 0;
-  animation: fade-in 0.6s ease-out 0.5s forwards;
-}
-
-.viewport-status .status-ok {
-  color: #4ade80;
 }
 
 .page-container {
@@ -130,14 +62,9 @@
   cursor: pointer;
 }
 
-.projects-grid {
-  perspective: 800px;
-}
-
 .project-card:hover {
-  transform: translateY(-4px) rotateX(2deg) rotateY(-1deg);
+  transform: translateY(-3px);
   border-color: var(--page-accent);
-  box-shadow: 0 0 15px rgba(96, 192, 240, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .project-card:hover .expand-overlay {
@@ -153,26 +80,6 @@
   aspect-ratio: 16/10;
   overflow: hidden;
   background: var(--bg-tertiary);
-}
-
-/* Blueprint dimension label on media */
-.project-media::after {
-  content: '16:10';
-  position: absolute;
-  bottom: 4px;
-  right: 6px;
-  font-family: 'VT323', monospace;
-  font-size: 0.65rem;
-  color: var(--page-accent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  letter-spacing: 1px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.project-card:hover .project-media::after {
-  opacity: 0.5;
 }
 
 .project-video,
@@ -192,7 +99,7 @@
 }
 
 .placeholder-text {
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   color: var(--text-dim);
   font-weight: 400;
@@ -222,39 +129,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Blueprint corner brackets */
-.project-card::before,
-.project-card::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-color: var(--page-accent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.project-card::before {
-  top: 6px;
-  left: 6px;
-  border-top: 2px solid;
-  border-left: 2px solid;
-}
-
-.project-card::after {
-  bottom: 6px;
-  right: 6px;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-}
-
-.project-card:hover::before,
-.project-card:hover::after {
-  opacity: 1;
-}
-
 .project-card {
   position: relative;
 }
@@ -264,7 +138,7 @@
 }
 
 .project-index {
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--page-accent);
   letter-spacing: 1px;
@@ -284,32 +158,6 @@
 .project-description {
   font-size: 0.9375rem;
   color: var(--text-secondary);
-}
-
-/* Blueprint grid ruler */
-.grid-ruler {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-  font-family: 'VT323', monospace;
-  font-size: 0.7rem;
-  color: var(--page-accent);
-  opacity: 0;
-  animation: fade-in 0.5s ease-out 0.6s forwards;
-}
-
-.ruler-label {
-  letter-spacing: 2px;
-  opacity: 0.5;
-}
-
-.ruler-tick {
-  opacity: 0.2;
-}
-
-.ruler-end {
-  margin-left: auto;
 }
 
 /* Project Modal */

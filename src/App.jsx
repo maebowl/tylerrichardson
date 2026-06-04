@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar'
 import ThemeEffects from './components/ThemeEffects'
-import StarField from './components/StarField'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Music from './pages/Music'
@@ -15,7 +14,6 @@ import Admin from './pages/Admin'
 function App() {
   return (
     <div className="app">
-      <StarField />
       <ThemeEffects />
       <Navbar />
       <main>
@@ -32,11 +30,7 @@ function App() {
       </main>
       <footer className="footer">
         <div className="footer-content">
-          <p className="footer-ascii">╔══════════════════════╗</p>
-          <p className="footer-ascii">║ &nbsp;&nbsp;---===[ TR ]===--- &nbsp;&nbsp;║</p>
-          <p className="footer-ascii">╚══════════════════════╝</p>
           <p className="footer-copyright">// Tyler Richardson {new Date().getFullYear()}</p>
-          <p className="footer-message">built with mass amounts of coffee and spite</p>
           <div className="footer-links">
             <a
               href="https://github.com/maebowl/tyler-site"

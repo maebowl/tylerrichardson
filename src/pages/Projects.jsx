@@ -27,10 +27,6 @@ function Projects() {
 
   return (
     <div className="projects-page">
-      <div className="blueprint-crosshair" aria-hidden="true">
-        <div className="crosshair-h"></div>
-        <div className="crosshair-v"></div>
-      </div>
       <div className="page-container">
         <header className="page-header">
           <h1 className="page-title">{siteSettings.projects.title}</h1>
@@ -38,27 +34,9 @@ function Projects() {
             {siteSettings.projects.intro}
           </p>
           <div className="viewport-status">
-            <span>VIEWPORT: RENDERED</span>
-            <span>OBJECTS: {projects.length}</span>
-            <span className="status-ok">▸ READY</span>
+            <span>{projects.length} renders</span>
           </div>
         </header>
-        <div className="blueprint-status" aria-hidden="true">
-          <span>SCALE 1:{projects.length}</span>
-          <span className="blueprint-sep">//</span>
-          <span>REV 0{projects.length}.1</span>
-          <span className="blueprint-sep">//</span>
-          <span>UNITS: px</span>
-          <span className="blueprint-sep">//</span>
-          <span className="blueprint-date">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' }).toUpperCase()}</span>
-        </div>
-        <div className="grid-ruler" aria-hidden="true">
-          <span className="ruler-label">X</span>
-          <span className="ruler-tick">|</span>
-          <span className="ruler-tick">|</span>
-          <span className="ruler-tick">|</span>
-          <span className="ruler-label ruler-end">→</span>
-        </div>
         <div className="projects-grid">
           {projects.map((project, index) => {
             const hasMedia = project.videoUrl || project.imageUrl

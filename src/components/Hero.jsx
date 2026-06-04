@@ -1,29 +1,48 @@
+import { Link } from 'react-router-dom'
 import { useSiteData } from '../data/siteData'
 import './Hero.css'
 
+const quickLinks = [
+  { label: 'Blender', to: '/projects' },
+  { label: 'Games', to: '/games' },
+  { label: 'Music', to: '/music' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Blog', to: '/blog' },
+]
+
 function Hero() {
   const { siteSettings } = useSiteData()
-  const { greeting, name, subtitle } = siteSettings.hero
+  const { name, subtitle, intro, currently } = siteSettings.hero
 
   return (
     <section id="about" className="hero">
       <div className="hero-content">
-        <div className="hero-ascii-border top">
-          ╔══════════════════════════════════════════╗
-        </div>
         <div className="hero-text">
-          <p className="hero-greeting">{greeting}</p>
-          <h1 className="hero-title">{name}<span className="blink-cursor">_</span></h1>
-          <p className="hero-subtitle">{subtitle}<span className="blink-cursor">_</span></p>
+          <h1 className="hero-title">{name}</h1>
+          <p className="hero-subtitle">{subtitle}</p>
+          {intro && <p className="hero-intro">{intro}</p>}
+          <nav className="hero-links" aria-label="Quick links">
+            {quickLinks.map((link) => (
+              <Link key={link.to} to={link.to} className="hero-link">
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
-        <div className="hero-ascii-border bottom">
-          ╚══════════════════════════════════════════╝
-        </div>
-        <div className="hero-status-bar">
-          <span className="status-item">STATUS: ONLINE</span>
-          <span className="status-item">LOCATION: THE INTERNET</span>
-          <span className="status-item blink-slow">● LIVE</span>
-        </div>
+
+        {currently && currently.length > 0 && (
+          <aside className="hero-currently" aria-label="What I'm currently into">
+            <span className="currently-heading">// currently</span>
+            <ul className="currently-list">
+              {currently.map((item, i) => (
+                <li key={i} className="currently-item">
+                  <span className="currently-label">{item.label}</span>
+                  <span className="currently-value">{item.value}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
       </div>
     </section>
   )

@@ -18,8 +18,9 @@
   --page-accent: var(--accent-primary);
 
   /* Fonts */
-  --font-heading: 'VT323', 'Courier New', monospace;
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
 
   font-family: var(--font-body);
   line-height: 1.6;
@@ -46,25 +47,6 @@ body {
   background: var(--bg-primary);
 }
 
-/* CRT scanline overlay */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9998;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
-}
-
 /* Selection styling */
 ::selection {
   background: var(--accent-primary);
@@ -89,15 +71,6 @@ body::after {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-primary);
-}
-
-/* Retro pixel cursor */
-*, *::before, *::after {
-  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M0 0 L0 14 L4 10 L7 16 L9 15 L6 9 L11 9 Z" fill="%23F0F7EE" stroke="%231B1B23" stroke-width="1"/></svg>') 0 0, auto;
-}
-
-a, button, [role="button"], input[type="submit"], .has-media, .has-video, .game-card, .badge-link {
-  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M0 0 L0 14 L4 10 L7 16 L9 15 L6 9 L11 9 Z" fill="%238287E1" stroke="%231B1B23" stroke-width="1"/></svg>') 0 0, pointer;
 }
 
 /* Retro focus ring */
@@ -148,35 +121,23 @@ a:hover {
 
 /* Retro divider under page headers */
 .page-header::after {
-  content: '════════════════════════════';
+  content: '────────────────────';
   display: block;
   color: var(--bg-tertiary);
-  font-family: 'VT323', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   letter-spacing: 2px;
   margin-top: 1rem;
   overflow: hidden;
   white-space: nowrap;
-  animation: divider-reveal 0.8s ease-out 0.3s both;
 }
 
-@keyframes divider-reveal {
-  from {
-    max-width: 0;
-    opacity: 0;
-  }
-  to {
-    max-width: 100%;
-    opacity: 1;
-  }
-}
-
-/* Page-specific accent colors */
-.music-page { --page-accent: #e88787; }
-.games-page { --page-accent: #4ade80; }
-.blog-page { --page-accent: #f0a050; }
-.projects-page { --page-accent: #60c0f0; }
-.contact-page { --page-accent: #c084fc; }
+/* Page-specific accent colors (gently muted) */
+.music-page { --page-accent: #d59595; }
+.games-page { --page-accent: #8fbfa0; }
+.blog-page { --page-accent: #d6a874; }
+.projects-page { --page-accent: #8bb3cf; }
+.contact-page { --page-accent: #b4a3d4; }
 
 /* Page-specific title colors */
 .music-page .page-title::before { color: var(--page-accent); }
@@ -184,13 +145,6 @@ a:hover {
 .blog-page .page-title::before { color: var(--page-accent); }
 .projects-page .page-title::before { color: var(--page-accent); }
 .contact-page .page-title::before { color: var(--page-accent); }
-
-/* Page-specific divider glow */
-.music-page .page-header::after { color: rgba(232, 135, 135, 0.3); }
-.games-page .page-header::after { color: rgba(74, 222, 128, 0.3); }
-.blog-page .page-header::after { color: rgba(240, 160, 80, 0.3); }
-.projects-page .page-header::after { color: rgba(96, 192, 240, 0.3); }
-.contact-page .page-header::after { color: rgba(192, 132, 252, 0.3); }
 
 /* Keyframe animations */
 @keyframes fade-in {
@@ -215,34 +169,14 @@ a:hover {
   }
 }
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-3deg); }
-  75% { transform: rotate(3deg); }
-}
-
-@keyframes glitch {
-  0%, 100% { text-shadow: none; }
-  20% { text-shadow: -2px 0 var(--accent-primary), 2px 0 #ff0040; }
-  40% { text-shadow: 2px 0 var(--accent-primary), -2px 0 #ff0040; }
-  60% { text-shadow: -1px 0 #ff0040, 1px 0 var(--accent-primary); }
-  80% { text-shadow: none; }
-}
-
-/* Card glow-on-hover for dashed borders */
-@keyframes border-glow {
-  0%, 100% { border-color: var(--accent-primary); }
-  50% { border-color: var(--accent-hover); }
-}
-
-/* Retro card enter animation */
+/* Card enter animation */
 @keyframes card-enter {
   from {
     opacity: 0;
-    transform: translateY(20px) rotate(-1deg);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0);
   }
 }

@@ -292,6 +292,15 @@ function FileUpload({ onUpload, accept, label, githubToken }) {
 }
 
 function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
+  const currently = siteSettings.hero.currently || []
+
+  const updateCurrently = (index, field, value) => {
+    const next = currently.map((it, i) => (i === index ? { ...it, [field]: value } : it))
+    updateSiteSettings('hero', { currently: next })
+  }
+  const addCurrently = () => updateSiteSettings('hero', { currently: [...currently, { label: '', value: '' }] })
+  const removeCurrently = (index) => updateSiteSettings('hero', { currently: currently.filter((_, i) => i !== index) })
+
   return (
     <div className="manager">
       <h2>Site Settings</h2>
@@ -300,14 +309,6 @@ function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
       <div className="settings-section">
         <h3>Home Page (Hero)</h3>
         <div className="settings-fields">
-          <label>
-            <span>Greeting</span>
-            <input
-              value={siteSettings.hero.greeting}
-              onChange={(e) => updateSiteSettings('hero', { greeting: e.target.value })}
-              placeholder="Hi, I'm"
-            />
-          </label>
           <label>
             <span>Name</span>
             <input
@@ -324,6 +325,36 @@ function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
               placeholder="Creative developer & 3D artist"
             />
           </label>
+          <label>
+            <span>Intro</span>
+            <textarea
+              value={siteSettings.hero.intro || ''}
+              onChange={(e) => updateSiteSettings('hero', { intro: e.target.value })}
+              placeholder="A short intro in your voice..."
+              rows={3}
+            />
+          </label>
+        </div>
+
+        <h4 className="subsection-title">Currently Into</h4>
+        <p className="manager-note">The little "currently" panel on the home page. The label is the small grey text (e.g. "playing"); the value is what shows below it.</p>
+        <div className="settings-fields">
+          {currently.map((item, index) => (
+            <div key={index} className="currently-edit-row">
+              <input
+                value={item.label}
+                onChange={(e) => updateCurrently(index, 'label', e.target.value)}
+                placeholder="playing"
+              />
+              <input
+                value={item.value}
+                onChange={(e) => updateCurrently(index, 'value', e.target.value)}
+                placeholder="Hollow Knight: Silksong"
+              />
+              <button type="button" className="btn-remove" onClick={() => removeCurrently(index)}>×</button>
+            </div>
+          ))}
+          <button type="button" className="btn-secondary" onClick={addCurrently}>+ Add row</button>
         </div>
       </div>
 

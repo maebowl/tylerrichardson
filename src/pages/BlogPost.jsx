@@ -48,27 +48,14 @@ function BlogPost() {
   return (
     <section className="blog-post-page">
       <div className="section-container">
-        <Link to="/blog" className="back-link">cd ../blog</Link>
-        <div className="post-terminal-window">
-          <div className="post-titlebar" aria-hidden="true">
-            <div className="post-dots">
-              <span className="dot dot-red"></span>
-              <span className="dot dot-yellow"></span>
-              <span className="dot dot-green"></span>
-            </div>
-            <span className="post-titlebar-text">{post.slug}.md — vim</span>
-            <div className="post-titlebar-spacer"></div>
-          </div>
-          <article className="post-content">
-            <header className="post-header">
-              <div className="post-meta-line" aria-hidden="true">
-                <span className="meta-tag">cat</span> ~/blog/{post.slug}.md
-              </div>
-              <time className="post-date">
-                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </time>
-              <h1 className="post-title">{post.title}</h1>
-            </header>
+        <Link to="/blog" className="back-link">back to blog</Link>
+        <article className="post-content">
+          <header className="post-header">
+            <time className="post-date">
+              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h1 className="post-title">{post.title}</h1>
+          </header>
 
           {media.length > 0 && (
             <div className="post-media-gallery">
@@ -109,7 +96,6 @@ function BlogPost() {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
-        </div>
       </div>
 
       {/* Media Modal */}

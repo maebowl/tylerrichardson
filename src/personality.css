@@ -59,14 +59,15 @@
 .hero-title {
   display: inline-block;
   position: relative;
+  margin-bottom: 1.6rem;
 }
 .hero-title::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.32em;
-  height: 0.34em;
+  bottom: -0.16em;
+  height: 0.12em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M3 8 Q25 2 50 7 T100 7 T150 7 T197 6' fill='none' stroke='%238287e1' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
   pointer-events: none;
 }

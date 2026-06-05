@@ -91,6 +91,31 @@ a:hover {
   color: var(--accent-hover);
 }
 
+/* Interaction defaults: arrow cursor everywhere (no text I-beam on UI),
+   and no accidental text-highlighting on chrome. Article text and form
+   fields stay selectable. */
+* {
+  cursor: default;
+}
+
+a, button, [role="button"], summary, label[for], .menu-toggle {
+  cursor: pointer;
+}
+
+input, textarea {
+  cursor: text;
+}
+
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.post-body, .post-body *, input, textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 /* Animated underline for content links (not nav/card links) */
 .post-body a, .page-intro a {
   position: relative;

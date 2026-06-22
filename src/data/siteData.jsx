@@ -7,9 +7,18 @@ const defaultData = {
           "subtitle": "Professional idiot and bad at video games",
           "intro": "Hey, I'm Tyler. I mess around in Blender, lose at video games (sometimes on purpose, allegedly), and collect records I can barely play. Poke around — there's renders, games I love, music I cry to, and the occasional blog post.",
           "currently": [
-              { "label": "playing", "value": "Hollow Knight: Silksong" },
-              { "label": "listening to", "value": "kessoku band" },
-              { "label": "watching", "value": "whatever's on my Letterboxd" }
+              {
+                  "label": "playing",
+                  "value": "Hollow Knight: Silksong"
+              },
+              {
+                  "label": "listening to",
+                  "value": "kessoku band"
+              },
+              {
+                  "label": "watching",
+                  "value": "whatever's on my Letterboxd"
+              }
           ]
       },
       "projects": {

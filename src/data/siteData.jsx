@@ -4,20 +4,16 @@ const defaultData = {
   siteSettings: {
       "hero": {
           "name": "Tyler Richardson",
-          "subtitle": "Professional idiot and bad at video games",
-          "intro": "Hey, I'm Tyler. I mess around in Blender, lose at video games (sometimes on purpose, allegedly), and collect records I can barely play. Poke around — there's renders, games I love, music I cry to, and the occasional blog post.",
+          "subtitle": "Professional dummy and bad at video games",
+          "intro": "idk what to put here lol",
           "currently": [
               {
                   "label": "playing",
-                  "value": "Hollow Knight: Silksong"
+                  "value": "Hollow Knight"
               },
               {
                   "label": "listening to",
-                  "value": "kessoku band"
-              },
-              {
-                  "label": "watching",
-                  "value": "whatever's on my Letterboxd"
+                  "value": "No Doubt"
               }
           ]
       },
@@ -35,7 +31,7 @@ const defaultData = {
       },
       "contact": {
           "title": "Contact",
-          "intro": "Come hang out, talk video games, or watch me fail.",
+          "intro": "",
           "taglines": {
               "discord": "Join my server",
               "youtube": "Random crap",
@@ -43,7 +39,7 @@ const defaultData = {
               "letterboxd": "Movie opinions",
               "steam": "My games",
               "characterhub": "My characters",
-              "tumblr": "Random crap"
+              "tumblr": "Randomer crap"
           },
           "badges": [
               {
@@ -94,7 +90,7 @@ const defaultData = {
       },
       "rlprojects": {
           "title": "Projects",
-          "intro": "Stuff I've built outside of Blender."
+          "intro": "Cool stuff I've built."
       }
   },
   games: [

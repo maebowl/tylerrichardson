@@ -227,7 +227,7 @@ const defaultData = {
       },
       {
           "title": "Machine Love",
-          "artist": "No Doubt",
+          "artist": "Jamie Paige",
           "youtubeUrl": "https://www.youtube.com/watch?v=sqK-jh4TDXo",
           "audioUrl": "",
           "id": 10

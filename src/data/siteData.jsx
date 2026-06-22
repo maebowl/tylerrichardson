@@ -217,6 +217,27 @@ const defaultData = {
           "youtubeUrl": "",
           "audioUrl": "/uploads/1768604086549-Hollow_Knight_OST_-_City_of_Tears.mp3",
           "id": 8
+      },
+      {
+          "title": "Just A Girl",
+          "artist": "No Doubt",
+          "youtubeUrl": "https://www.youtube.com/watch?v=PHzOOQfhPFg",
+          "audioUrl": "",
+          "id": 9
+      },
+      {
+          "title": "Machine Love",
+          "artist": "No Doubt",
+          "youtubeUrl": "https://www.youtube.com/watch?v=sqK-jh4TDXo",
+          "audioUrl": "",
+          "id": 10
+      },
+      {
+          "title": "Selfish Princess",
+          "artist": "Fujiwo",
+          "youtubeUrl": "https://www.youtube.com/watch?v=pLaPtcmn4Bs",
+          "audioUrl": "",
+          "id": 11
       }
   ],
   posts: [

@@ -226,9 +226,9 @@ const defaultData = {
           "id": 9
       },
       {
-          "title": "Machine Love",
-          "artist": "Jamie Paige",
-          "youtubeUrl": "https://www.youtube.com/watch?v=sqK-jh4TDXo",
+          "title": "Seven Dollars",
+          "artist": "Happy Birthday Mr. Baskets",
+          "youtubeUrl": "https://www.youtube.com/watch?v=ldKoXzVdMGw",
           "audioUrl": "",
           "id": 10
       },

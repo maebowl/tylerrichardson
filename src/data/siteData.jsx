@@ -242,30 +242,12 @@ const defaultData = {
   ],
   posts: [
       {
-          "slug": "built-arcade-cocktail-table",
-          "title": "I built an arcade table!",
-          "date": "2026-05-10",
-          "excerpt": "Holy crap this was a lot of work",
-          "content": "So yeah, this is pretty cool. I started this project pretty much exactly a year ago with my dad (i remember making jokes about it being a Mother’s Day gift), but we sort of procrastinated on the last few parts of it until about a week ago. We started by getting all the computer stuff we needed - it’s powered by a Raspberry Pi, with a cheap LG TV as the screen and (sort of crappy) EG Starts arcade buttons and joysticks. We built a wood skeleton of what we wanted the table to generally be shaped like, then we made the sides out of a high-quality plywood. This is where the first of our two breaks began; it looked really good already, and while it’d look even better with a vinyl wrap, that was terrifying because we’d never done it before. Eventually, though, we put a carbon-fiber vinyl wrap on all the sides… and when we got to the buttons we once again took a break. It was way more complicated than “put vinyl on flat surface”, and we were once again nervous to alter something that already looked good. But we finally got back to it, and here’s the finished product! I’m super happy with how it turned out, and the software side is no different. We have a heavily altered distribution of RetroPie in which both the games and the menu itself had to be flipped 90 degrees. There’s also a mirror shader to the games, so both players see the same thing. It took a lot of work and customization, but this thing we never use is definitely probably worth it maybe.",
-          "media": [
-              {
-                  "type": "image",
-                  "url": "/uploads/1778449967946-IMG_8012.jpeg"
-              }
-          ]
-      },
-      {
-          "slug": "got-a-record-player",
-          "title": "I got a record player!",
-          "date": "2026-01-11",
-          "excerpt": "It go spinny",
-          "content": "So... Fangamer sells vinyl records. I feel like that's all the explanation needed to understand why I got this thing. I found it used for around $150, and despite the delays (Fangamer was backed up after Christmas), the records got here first. \n<br><br>\nIf you know anything about me, you know OneShot is my favorite game of all time. As much as I love it, I have to admit that the OST isn't that solid. Even so, I felt like this had to be my first record. And honestly? It's great. I love listening to it, even if the Hollow Knight record might have been a better pick.\n<br><br>\nAs for the record player itself, the needle sometimes gets stuck and starts skipping, but that's really the only problem; it looks and plays great.\n<br><br>\nThe only problem is that... I don't have powered speakers, or an open outlet I could plug them into. No big deal, the player is set up right next to my TV, so I can just use its composite input. But… that requires a video signal as well, so whenever I want to listen to my records, I have to power on my SNES. Naturally. Is it a bit of a gimped setup? Definitely. Does it work? It sure does.\n<br><br>\nI'm not exactly sure how I feel about vinyl as a medium. It's cool and all, but it doesn't really feel as premium as I thought, and it doesn't sound different enough for me to really want all my music to be on vinyl when I could just... <i>VERY LEGALLY</i> get mp3s of all my music instead. But hey, maybe I just need to get an OST I care more about. I'll stick with it for a bit longer, I guess.",
-          "media": [
-              {
-                  "type": "image",
-                  "url": "/uploads/1772465382081-IMG_7631.jpeg"
-              }
-          ]
+          "slug": "gotta-delete",
+          "title": "Probs gonna delete this",
+          "date": "2026-07-13",
+          "excerpt": "I just never use it",
+          "content": "I feel like I do cool stuff. Maaaaybe a blog would work for me? I just have never updated it, and I doubt anyone even looks at it anyways. So the next chance I have, the blog section of this site is getting deleted.",
+          "media": []
       }
   ],
   socials: [

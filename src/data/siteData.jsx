@@ -120,7 +120,7 @@ const defaultData = {
       },
       {
           "title": "Haste",
-          "description": "Sonic but actually good",
+          "description": "Sonic but peak",
           "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fshared.cloudflare.steamstatic.com%2Fstore_item_assets%2Fsteam%2Fapps%2F2940200%2F79643d1435e7229fa2ca5fca218a7caca2d86fdb%2Flibrary_600x900_2x.jpg&f=1&nofb=1&ipt=205f50e2104678f5f7883c55332eea67bc1e7acf5334e3e02cde8b26cbbe986f",
           "id": 5
       },

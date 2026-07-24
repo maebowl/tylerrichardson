@@ -108,7 +108,7 @@ const defaultData = {
       },
       {
           "title": "OneShot",
-          "description": "I can’t even make a joke about this one it’s just too good",
+          "description": "I can’t even make a joke about this one",
           "imageUrl": "https://m.media-amazon.com/images/M/MV5BNWQzYWE5MjQtYmE0MS00MDc0LTlmZTYtMDBiMjBmNmUxYjdlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
           "id": 3
       },

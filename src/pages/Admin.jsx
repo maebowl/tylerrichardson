@@ -13,7 +13,7 @@ function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [activeTab, setActiveTab] = useState('posts')
+  const [activeTab, setActiveTab] = useState('settings')
   const [githubToken, setGithubToken] = useState('')
   const [rawgKey, setRawgKey] = useState('')
   const [showTokenInput, setShowTokenInput] = useState(false)
@@ -21,13 +21,12 @@ function Admin() {
   const [saveStatus, setSaveStatus] = useState('')
 
   const {
-    siteSettings, games, projects, rlprojects, songs, posts, socials,
+    siteSettings, games, projects, rlprojects, songs, socials,
     updateSiteSettings,
     updateGames, addGame, updateGame, deleteGame,
     updateProjects, addProject, updateProject, deleteProject,
     updateRlprojects, addRlproject, updateRlproject, deleteRlproject,
     updateSongs, addSong, updateSong, deleteSong,
-    updatePosts, addPost, updatePost, deletePost,
     updateSocials, updateSocial, resetToDefaults
   } = useSiteData()
 
@@ -80,7 +79,7 @@ function Admin() {
     setSaveStatus('')
 
     try {
-      await saveToGitHub({ siteSettings, games, projects, rlprojects, songs, posts, socials }, githubToken)
+      await saveToGitHub({ siteSettings, games, projects, rlprojects, songs, socials }, githubToken)
       setSaveStatus('Saved to GitHub! Site will rebuild shortly.')
     } catch (err) {
       setSaveStatus(`Error: ${err.message}`)
@@ -170,12 +169,6 @@ function Admin() {
             Site Settings
           </button>
           <button
-            className={`tab ${activeTab === 'posts' ? 'active' : ''}`}
-            onClick={() => setActiveTab('posts')}
-          >
-            Blog Posts
-          </button>
-          <button
             className={`tab ${activeTab === 'games' ? 'active' : ''}`}
             onClick={() => setActiveTab('games')}
           >
@@ -222,9 +215,6 @@ function Admin() {
         <div className="admin-content">
           {activeTab === 'settings' && (
             <SiteSettingsManager siteSettings={siteSettings} updateSiteSettings={updateSiteSettings} />
-          )}
-          {activeTab === 'posts' && (
-            <PostsManager posts={posts} addPost={addPost} updatePost={updatePost} deletePost={deletePost} updatePosts={updatePosts} githubToken={githubToken} />
           )}
           {activeTab === 'games' && (
             <GamesManager games={games} addGame={addGame} updateGame={updateGame} deleteGame={deleteGame} updateGames={updateGames} githubToken={githubToken} rawgKey={rawgKey} />
@@ -477,29 +467,6 @@ function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
       </div>
 
       <div className="settings-section">
-        <h3>Blog Page</h3>
-        <div className="settings-fields">
-          <label>
-            <span>Title</span>
-            <input
-              value={siteSettings.blog?.title || ''}
-              onChange={(e) => updateSiteSettings('blog', { title: e.target.value })}
-              placeholder="Blog"
-            />
-          </label>
-          <label>
-            <span>Intro Text</span>
-            <textarea
-              value={siteSettings.blog?.intro || ''}
-              onChange={(e) => updateSiteSettings('blog', { intro: e.target.value })}
-              placeholder="Page introduction..."
-              rows={2}
-            />
-          </label>
-        </div>
-      </div>
-
-      <div className="settings-section">
         <h3>Projects Page (non-Blender)</h3>
         <div className="settings-fields">
           <label>
@@ -520,212 +487,6 @@ function SiteSettingsManager({ siteSettings, updateSiteSettings }) {
             />
           </label>
         </div>
-      </div>
-    </div>
-  )
-}
-
-function PostsManager({ posts, addPost, updatePost, deletePost, updatePosts, githubToken }) {
-  const [editing, setEditing] = useState(null)
-  const [newPost, setNewPost] = useState({ slug: '', title: '', date: '', excerpt: '', content: '', media: [] })
-
-  // Helper to migrate old posts with imageUrl/videoUrl to new media array format
-  const getPostMedia = (post) => {
-    if (post.media) return post.media
-    // Migrate old format
-    const media = []
-    if (post.imageUrl) media.push({ type: 'image', url: post.imageUrl })
-    if (post.videoUrl) media.push({ type: 'video', url: post.videoUrl })
-    return media
-  }
-
-  const handleAdd = () => {
-    if (!newPost.slug || !newPost.title) return
-    addPost({
-      ...newPost,
-      date: newPost.date || new Date().toISOString().split('T')[0]
-    })
-    setNewPost({ slug: '', title: '', date: '', excerpt: '', content: '', media: [] })
-  }
-
-  const handleUpdate = (slug) => {
-    updatePost(slug, editing)
-    setEditing(null)
-  }
-
-  const addMediaToNew = (type, url) => {
-    setNewPost({ ...newPost, media: [...newPost.media, { type, url }] })
-  }
-
-  const removeMediaFromNew = (index) => {
-    setNewPost({ ...newPost, media: newPost.media.filter((_, i) => i !== index) })
-  }
-
-  const addMediaToEditing = (type, url) => {
-    const media = getPostMedia(editing)
-    setEditing({ ...editing, media: [...media, { type, url }] })
-  }
-
-  const removeMediaFromEditing = (index) => {
-    const media = getPostMedia(editing)
-    setEditing({ ...editing, media: media.filter((_, i) => i !== index) })
-  }
-
-  const moveItem = (index, direction) => {
-    const newIndex = index + direction
-    if (newIndex < 0 || newIndex >= posts.length) return
-    const newPosts = [...posts]
-    const [removed] = newPosts.splice(index, 1)
-    newPosts.splice(newIndex, 0, removed)
-    updatePosts(newPosts)
-  }
-
-  return (
-    <div className="manager">
-      <h2>Blog Posts</h2>
-      <p className="manager-note">Add multiple images and videos to each post.</p>
-
-      <div className="add-form">
-        <h3>Add New Post</h3>
-        <input
-          placeholder="Slug (url-friendly)"
-          value={newPost.slug}
-          onChange={(e) => setNewPost({ ...newPost, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
-        />
-        <input
-          placeholder="Title"
-          value={newPost.title}
-          onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
-        />
-        <input
-          type="date"
-          value={newPost.date}
-          onChange={(e) => setNewPost({ ...newPost, date: e.target.value })}
-        />
-        <input
-          placeholder="Excerpt"
-          value={newPost.excerpt}
-          onChange={(e) => setNewPost({ ...newPost, excerpt: e.target.value })}
-        />
-
-        <div className="media-section">
-          <h4>Media ({newPost.media.length})</h4>
-          {newPost.media.map((item, index) => (
-            <div key={index} className="media-item">
-              <span className="media-type">{item.type === 'image' ? '🖼️' : '🎬'}</span>
-              <span className="media-url">{item.url}</span>
-              <button type="button" className="btn-remove" onClick={() => removeMediaFromNew(index)}>×</button>
-            </div>
-          ))}
-          <div className="media-add-row">
-            <FileUpload
-              accept="image/*"
-              label="+ Add Image"
-              githubToken={githubToken}
-              onUpload={(url) => addMediaToNew('image', url)}
-            />
-            <FileUpload
-              accept="video/mp4,video/webm,video/x-matroska,.mkv"
-              label="+ Add Video"
-              githubToken={githubToken}
-              onUpload={(url) => addMediaToNew('video', url)}
-            />
-          </div>
-        </div>
-
-        <textarea
-          placeholder="Content (HTML supported)"
-          value={newPost.content}
-          onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-          rows={5}
-        />
-        <button onClick={handleAdd}>Add Post</button>
-      </div>
-
-      <div className="items-list">
-        {posts.map((post, index) => {
-          const postMedia = getPostMedia(post)
-
-          return (
-            <div key={post.slug} className="item">
-              {editing?.slug === post.slug ? (
-                <>
-                  <input
-                    value={editing.title}
-                    onChange={(e) => setEditing({ ...editing, title: e.target.value })}
-                    placeholder="Title"
-                  />
-                  <input
-                    type="date"
-                    value={editing.date}
-                    onChange={(e) => setEditing({ ...editing, date: e.target.value })}
-                  />
-                  <input
-                    value={editing.excerpt}
-                    onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })}
-                    placeholder="Excerpt"
-                  />
-
-                  <div className="media-section">
-                    <h4>Media ({getPostMedia(editing).length})</h4>
-                    {getPostMedia(editing).map((item, index) => (
-                      <div key={index} className="media-item">
-                        <span className="media-type">{item.type === 'image' ? '🖼️' : '🎬'}</span>
-                        <span className="media-url">{item.url}</span>
-                        <button type="button" className="btn-remove" onClick={() => removeMediaFromEditing(index)}>×</button>
-                      </div>
-                    ))}
-                    <div className="media-add-row">
-                      <FileUpload
-                        accept="image/*"
-                        label="+ Add Image"
-                        githubToken={githubToken}
-                        onUpload={(url) => addMediaToEditing('image', url)}
-                      />
-                      <FileUpload
-                        accept="video/mp4,video/webm,video/x-matroska,.mkv"
-                        label="+ Add Video"
-                        githubToken={githubToken}
-                        onUpload={(url) => addMediaToEditing('video', url)}
-                      />
-                    </div>
-                  </div>
-
-                  <textarea
-                    value={editing.content}
-                    onChange={(e) => setEditing({ ...editing, content: e.target.value })}
-                    rows={5}
-                  />
-                  <div className="item-actions">
-                    <button onClick={() => handleUpdate(post.slug)}>Save</button>
-                    <button onClick={() => setEditing(null)}>Cancel</button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="reorder-buttons">
-                    <button onClick={() => moveItem(index, -1)} disabled={index === 0} className="btn-reorder" title="Move up">▲</button>
-                    <button onClick={() => moveItem(index, 1)} disabled={index === posts.length - 1} className="btn-reorder" title="Move down">▼</button>
-                  </div>
-                  <div className="item-info">
-                    <strong>{post.title}</strong>
-                    <span className="item-meta">/{post.slug} - {post.date}</span>
-                    <p>{post.excerpt}</p>
-                    {postMedia.length > 0 && (
-                      <span className="item-meta">
-                        Media: {postMedia.filter(m => m.type === 'image').length} images, {postMedia.filter(m => m.type === 'video').length} videos
-                      </span>
-                    )}
-                  </div>
-                  <div className="item-actions">
-                    <button onClick={() => setEditing({ ...post, media: postMedia })}>Edit</button>
-                    <button onClick={() => deletePost(post.slug)} className="btn-danger">Delete</button>
-                  </div>
-                </>
-              )}
-            </div>
-          )
-        })}
       </div>
     </div>
   )

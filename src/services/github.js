@@ -143,7 +143,7 @@ export async function uploadFileToGitHub(file, token) {
 }
 
 function generateSiteDataFile(data) {
-  const { siteSettings, games, projects, rlprojects, songs, posts, socials } = data
+  const { siteSettings, games, projects, rlprojects, songs, socials } = data
 
   // Helper to indent JSON properly (add 2 spaces to each line after the first)
   const indent = (json) => {
@@ -159,7 +159,6 @@ const defaultData = {
   projects: ${indent(JSON.stringify(projects, null, 4))},
   rlprojects: ${indent(JSON.stringify(rlprojects, null, 4))},
   songs: ${indent(JSON.stringify(songs, null, 4))},
-  posts: ${indent(JSON.stringify(posts, null, 4))},
   socials: ${indent(JSON.stringify(socials, null, 4))},
 }
 
@@ -171,7 +170,6 @@ export function SiteDataProvider({ children }) {
   const updateGames = (games) => setData(prev => ({ ...prev, games }))
   const updateProjects = (projects) => setData(prev => ({ ...prev, projects }))
   const updateSongs = (songs) => setData(prev => ({ ...prev, songs }))
-  const updatePosts = (posts) => setData(prev => ({ ...prev, posts }))
   const updateSocials = (socials) => setData(prev => ({ ...prev, socials }))
 
   const addGame = (game) => {
@@ -240,21 +238,6 @@ export function SiteDataProvider({ children }) {
     setData(prev => ({ ...prev, songs: prev.songs.filter(s => s.id !== id) }))
   }
 
-  const addPost = (post) => {
-    setData(prev => ({ ...prev, posts: [...prev.posts, post] }))
-  }
-
-  const updatePost = (slug, updates) => {
-    setData(prev => ({
-      ...prev,
-      posts: prev.posts.map(p => p.slug === slug ? { ...p, ...updates } : p)
-    }))
-  }
-
-  const deletePost = (slug) => {
-    setData(prev => ({ ...prev, posts: prev.posts.filter(p => p.slug !== slug) }))
-  }
-
   const updateSocial = (id, updates) => {
     setData(prev => ({
       ...prev,
@@ -296,7 +279,6 @@ export function SiteDataProvider({ children }) {
       updateProjects,
       updateRlprojects,
       updateSongs,
-      updatePosts,
       updateSocials,
       addGame,
       updateGame,
@@ -310,9 +292,6 @@ export function SiteDataProvider({ children }) {
       addSong,
       updateSong,
       deleteSong,
-      addPost,
-      updatePost,
-      deletePost,
       updateSocial,
       updateSiteSettings,
       resetToDefaults,

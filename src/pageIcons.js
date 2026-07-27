@@ -35,11 +35,6 @@ export const PAGE_ICONS = {
     color: '#b4a3d4',
     path: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
   },
-  blog: {
-    label: 'Blog',
-    color: '#d6a874',
-    path: 'M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z',
-  },
   admin: {
     label: 'Admin',
     color: '#8287E1',
@@ -54,7 +49,6 @@ export function getPageIconKey(pathname) {
   if (pathname.startsWith('/games')) return 'games'
   if (pathname.startsWith('/music')) return 'music'
   if (pathname.startsWith('/contact')) return 'contact'
-  if (pathname.startsWith('/blog')) return 'blog'
   if (pathname.startsWith('/admin')) return 'admin'
   return 'home'
 }

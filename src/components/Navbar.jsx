@@ -102,7 +102,6 @@ function Navbar() {
             <li><Link to="/games" onClick={closeMenu} className={isActive('/games') ? 'active' : ''}>Games</Link></li>
             <li><Link to="/music" onClick={closeMenu} className={isActive('/music') ? 'active' : ''}>Music</Link></li>
             <li><Link to="/contact" onClick={closeMenu} className={isActive('/contact') ? 'active' : ''}>Contact</Link></li>
-            <li><Link to="/blog" onClick={closeMenu} className={isActive('/blog') ? 'active' : ''}>Blog</Link></li>
           </ul>
         </div>
       </nav>

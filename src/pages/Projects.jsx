@@ -106,6 +106,7 @@ function Projects() {
                   muted
                   playsInline
                   controls
+                  onVolumeChange={(e) => { e.target.muted = true }}
                   className="modal-video"
                 />
               ) : (

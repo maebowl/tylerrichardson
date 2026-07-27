@@ -4,12 +4,17 @@ const defaultData = {
   siteSettings: {
       "hero": {
           "name": "Tyler Richardson",
-          "subtitle": "Professional idiot and bad at video games",
-          "intro": "Hey, I'm Tyler. I mess around in Blender, lose at video games (sometimes on purpose, allegedly), and collect records I can barely play. Poke around — there's renders, games I love, and music I cry to.",
+          "subtitle": "Professional dummy and bad at video games",
+          "intro": "idk what to put here lol",
           "currently": [
-              { "label": "playing", "value": "Hollow Knight: Silksong" },
-              { "label": "listening to", "value": "kessoku band" },
-              { "label": "watching", "value": "whatever's on my Letterboxd" }
+              {
+                  "label": "playing",
+                  "value": "FPS Chess"
+              },
+              {
+                  "label": "listening to",
+                  "value": "Green Day"
+              }
           ]
       },
       "projects": {
@@ -26,7 +31,7 @@ const defaultData = {
       },
       "contact": {
           "title": "Contact",
-          "intro": "Come hang out, talk video games, or watch me fail.",
+          "intro": "",
           "taglines": {
               "discord": "Join my server",
               "youtube": "Random crap",
@@ -34,7 +39,7 @@ const defaultData = {
               "letterboxd": "Movie opinions",
               "steam": "My games",
               "characterhub": "My characters",
-              "tumblr": "Random crap"
+              "tumblr": "Randomer crap"
           },
           "badges": [
               {
@@ -81,7 +86,7 @@ const defaultData = {
       },
       "rlprojects": {
           "title": "Projects",
-          "intro": "Stuff I've built outside of Blender."
+          "intro": "Cool stuff I've built."
       }
   },
   games: [
@@ -99,7 +104,7 @@ const defaultData = {
       },
       {
           "title": "OneShot",
-          "description": "I can’t even make a joke about this one it’s just too good",
+          "description": "I can’t even make a joke about this one",
           "imageUrl": "https://m.media-amazon.com/images/M/MV5BNWQzYWE5MjQtYmE0MS00MDc0LTlmZTYtMDBiMjBmNmUxYjdlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
           "id": 3
       },
@@ -111,8 +116,8 @@ const defaultData = {
       },
       {
           "title": "Haste",
-          "description": "Sonic but actually good",
-          "imageUrl": "https://www.gematsu.com/wp-content/uploads/2023/11/Game-Page-Box-Art_HASTE-Broken-Worlds-Inits.jpg",
+          "description": "Sonic but peak",
+          "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fshared.cloudflare.steamstatic.com%2Fstore_item_assets%2Fsteam%2Fapps%2F2940200%2F79643d1435e7229fa2ca5fca218a7caca2d86fdb%2Flibrary_600x900_2x.jpg&f=1&nofb=1&ipt=205f50e2104678f5f7883c55332eea67bc1e7acf5334e3e02cde8b26cbbe986f",
           "id": 5
       },
       {
@@ -158,9 +163,9 @@ const defaultData = {
       },
       {
           "title": "VTuber model",
-          "description": "i will NOT be sharing the blender file.",
-          "imageUrl": "/uploads/1769901146797-untitled.png",
-          "videoUrl": "",
+          "description": "i will NOT be sharing the model files.",
+          "imageUrl": "",
+          "videoUrl": "/uploads/1782162445349-2026-06-11_17-36-58.mkv",
           "id": 4
       }
   ],
@@ -208,6 +213,27 @@ const defaultData = {
           "youtubeUrl": "",
           "audioUrl": "/uploads/1768604086549-Hollow_Knight_OST_-_City_of_Tears.mp3",
           "id": 8
+      },
+      {
+          "title": "Just A Girl",
+          "artist": "No Doubt",
+          "youtubeUrl": "https://www.youtube.com/watch?v=PHzOOQfhPFg",
+          "audioUrl": "",
+          "id": 9
+      },
+      {
+          "title": "Seven Dollars",
+          "artist": "Happy Birthday Mr. Baskets",
+          "youtubeUrl": "https://www.youtube.com/watch?v=ldKoXzVdMGw",
+          "audioUrl": "",
+          "id": 10
+      },
+      {
+          "title": "Selfish Princess",
+          "artist": "Fujiwo",
+          "youtubeUrl": "https://www.youtube.com/watch?v=pLaPtcmn4Bs",
+          "audioUrl": "",
+          "id": 11
       }
   ],
   socials: [

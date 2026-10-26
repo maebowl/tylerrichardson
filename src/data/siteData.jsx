@@ -242,7 +242,7 @@ const defaultData = {
       },
       {
           "title": "Seven Dollars",
-          "artist": "Happy Birthday Mr. Baskets",
+          "artist": "VIDEOMANCER",
           "youtubeUrl": "https://www.youtube.com/watch?v=ldKoXzVdMGw",
           "audioUrl": "",
           "id": 10

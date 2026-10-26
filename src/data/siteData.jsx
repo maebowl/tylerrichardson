@@ -178,7 +178,7 @@ const defaultData = {
           "title": "Buckshot Roulette IRL",
           "description": "Try not to die lol",
           "imageUrl": "",
-          "videoUrl": "https://youtube.com/shorts/I392cfG0dcI",
+          "videoUrl": "https://youtube.com/watch/I392cfG0dcI",
           "id": 1
       },
       {

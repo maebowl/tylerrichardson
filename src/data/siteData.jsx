@@ -173,7 +173,15 @@ const defaultData = {
           "id": 4
       }
   ],
-  rlprojects: [],
+  rlprojects: [
+      {
+          "title": "Buckshot Roulette IRL",
+          "description": "Try not to die lol",
+          "imageUrl": "",
+          "videoUrl": "https://youtube.com/shorts/I392cfG0dcI",
+          "id": 1
+      }
+  ],
   songs: [
       {
           "title": "P.A.R.T.Y.",

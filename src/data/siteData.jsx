@@ -9,11 +9,15 @@ const defaultData = {
           "currently": [
               {
                   "label": "playing",
-                  "value": "FPS Chess"
+                  "value": "GTA 5"
               },
               {
                   "label": "listening to",
-                  "value": "Green Day"
+                  "value": "Ado"
+              },
+              {
+                  "label": "working on",
+                  "value": "College Apps"
               }
           ]
       },

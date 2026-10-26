@@ -180,6 +180,13 @@ const defaultData = {
           "imageUrl": "",
           "videoUrl": "https://youtube.com/shorts/I392cfG0dcI",
           "id": 1
+      },
+      {
+          "title": "Arcade Cocktail Cabinet",
+          "description": "I promise I got all the ROMs legally please don’t hurt me Nintendo",
+          "imageUrl": "/uploads/1792994338822-IMG_8609.jpeg",
+          "videoUrl": "",
+          "id": 2
       }
   ],
   songs: [

@@ -253,6 +253,20 @@ const defaultData = {
           "youtubeUrl": "https://www.youtube.com/watch?v=pLaPtcmn4Bs",
           "audioUrl": "",
           "id": 11
+      },
+      {
+          "title": "Du Hast",
+          "artist": "Rammstein",
+          "youtubeUrl": "https://m.youtube.com/watch?v=W3q8Od5qJio",
+          "audioUrl": "",
+          "id": 12
+      },
+      {
+          "title": "Evil Fucking Wizard",
+          "artist": "Cone Poem",
+          "youtubeUrl": "https://m.youtube.com/watch?v=jX5MX1ScY9c",
+          "audioUrl": "",
+          "id": 13
       }
   ],
   socials: [
